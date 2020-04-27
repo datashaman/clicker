@@ -22,9 +22,9 @@
     <ul>
       <li v-for="(defn, id) in buildings">
         {{ id }} {{ defn.count }} x {{ defn.cps }}cps:
-        <a @click.prevent="building(id, 1)">+1</a>
-        <a @click.prevent="building(id, 10)">+10</a>
-        <a @click.prevent="building(id, 100)">+100</a>
+        <a @click.prevent="building(id, 1)">+1 ({{ buildingCost(defn, 1) }})</a>
+        <a @click.prevent="building(id, 10)">+10 ({{ buildingCost(defn, 10) }})</a>
+        <a @click.prevent="building(id, 100)">+100 ({{ buildingCost(defn, 100) }})</a>
       </li>
     </ul>
   </div>
@@ -32,6 +32,7 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex'
+import costs from '~/mixins/costs'
 
 export default {
   computed: {
@@ -50,10 +51,15 @@ export default {
     click: function () {
       this.$store.commit('click', { amount: this.factor })
     },
+    cost: function (building, amount) {
+    },
     upgrade: function (id) {
       this.$store.commit('upgrade', { id })
     },
   },
+  mixins: [
+    costs,
+  ],
   mounted: function () {
     this.$nextTick(() => {
       Object.keys(this.buildings).forEach((id) => {

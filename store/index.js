@@ -1,18 +1,23 @@
+import costs from '~/mixins/costs'
+
 export const state = () => ({
   buildings: {
     A: {
       count: 0,
       cost: 10,
+      costFactor: 0.1,
       cps: 10,
     },
     B: {
       count: 0,
       cost: 100,
+      costFactor: 0.2,
       cps: 100,
     },
     C: {
       count: 0,
       cost: 1000,
+      costFactor: 0.4,
       cps: 1000,
     },
   },
@@ -59,10 +64,13 @@ export const state = () => ({
 export const mutations = {
   building (state, { id, amount }) {
     let building = state.buildings[id]
+    let cost = costs.methods.buildingCost(building, amount)
 
-    if (building.cost * amount <= state.clicks) {
-      state.clicks -= building.cost * amount
+    if (cost <= state.clicks) {
+      state.clicks -= cost
       state.buildings[id].count += amount
+    } else {
+      console.error('cannot afford this')
     }
   },
   click (state, { amount }) {
