@@ -11,10 +11,12 @@
     <h3>Upgrades</h3>
 
     <ul>
-      <li v-for="(defn, id) in upgrades">
-        <div v-if="defn.bought"><strike>{{ defn.title }}</strike></div>
-        <a v-else @click.prevent="upgrade(id)">{{ defn.title }}</a>
-      </li>
+      <template v-for="(defn, id) in upgrades">
+        <li v-if="clicks >= defn.required">
+          <div v-if="defn.bought"><strike>{{ defn.title }}</strike></div>
+          <a v-else @click.prevent="upgrade(id)">{{ defn.title }} ({{ defn.cost }})</a>
+        </li>
+      </template>
     </ul>
 
     <h3>Buildings</h3>

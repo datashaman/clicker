@@ -26,37 +26,49 @@ export const state = () => ({
   upgrades: {
     'manual': {
       bought: false,
+      cost: 1000,
       factor: 0.05,
       title: 'Manual',
+      required: 100,
     },
     'manual++': {
       bought: false,
+      cost: 5000,
       factor: 0.05,
       title: 'Manual++',
+      required: 1000,
     },
     'a+': {
       bought: false,
+      cost: 5000,
       building: 'A',
       factor: 0.05,
       title: 'A+',
+      required: 100,
     },
     'a++': {
       bought: false,
+      cost: 10000,
       building: 'A',
       factor: 0.1,
       title: 'A++',
+      required: 1000,
     },
     'b+': {
       bought: false,
+      cost: 50000,
       building: 'B',
       factor: 0.05,
       title: 'B+',
+      required: 10000,
     },
     'c+': {
       bought: false,
+      cost: 100000,
       building: 'C',
       factor: 0.05,
       title: 'C+',
+      required: 100000,
     },
   },
 })
@@ -79,12 +91,15 @@ export const mutations = {
   upgrade (state, { id }) {
     let upgrade = state.upgrades[id]
 
-    if (upgrade.building) {
-      state.buildings[upgrade.building].cps += state.buildings[upgrade.building].cps * upgrade.factor
+    if (upgrade.cost <= state.clicks) {
+      if (upgrade.building) {
+        state.buildings[upgrade.building].cps += state.buildings[upgrade.building].cps * upgrade.factor
+      } else {
+        state.factor += state.factor * upgrade.factor
+      }
+      upgrade.bought = true
     } else {
-      state.factor += state.factor * upgrade.factor
+      console.error('cannot afford this')
     }
-
-    upgrade.bought = true
   }
 }
