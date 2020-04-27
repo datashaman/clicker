@@ -58,7 +58,12 @@ export const state = () => ({
 
 export const mutations = {
   building (state, { id, amount }) {
-    state.buildings[id].count += amount
+    let building = state.buildings[id]
+
+    if (building.cost * amount <= state.clicks) {
+      state.clicks -= building.cost * amount
+      state.buildings[id].count += amount
+    }
   },
   click (state, { amount }) {
     state.clicks += amount
