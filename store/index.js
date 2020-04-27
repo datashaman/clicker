@@ -97,6 +97,7 @@ export const mutations = {
       } else {
         state.factor += state.factor * upgrade.factor
       }
+      state.clicks -= upgrade.cost
       upgrade.bought = true
     } else {
       console.error('cannot afford this')
