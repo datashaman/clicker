@@ -1,0 +1,23 @@
+{
+  "name": "clicker",
+  "version": "1.0.0",
+  "description": "Generic clicker",
+  "author": "Marlin Forbes",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "nuxt": "^2.0.0"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1",
+    "@nuxtjs/stylelint-module": "^3.1.0",
+    "stylelint": "^10.1.0"
+  }
+}
