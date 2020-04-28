@@ -1,11 +1,11 @@
 <template>
-  <div :class="buildingClass" @click.prevent="building(id)">
+  <div :class="buildingClass" @click="build({ id })">
     <div class="text-2xl">
       <div class="float-right">{{ definition.count }}</div>
       {{ id }}
     </div>
-    <div class="text-lg">
-      <template v-if="scale > 1">x{{ scale }}</template>
+    <div>
+      <template v-if="purchaseAmount > 1">x{{ purchaseAmount }}</template>
       <fa-icon icon="bolt" />
       {{ renderAmount(cost) }}
     </div>
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 import costs from '~/mixins/costs'
 
 export default {
@@ -23,13 +23,9 @@ export default {
       type: String,
       default: '',
     },
-    purchaseAmount: {
-      type: Number,
-      default: 1,
-    },
   },
   computed: {
-    ...mapState(['buildings']),
+    ...mapState(['buildings', 'purchaseAmount']),
     amount: function () {
       return 1
     },
@@ -46,9 +42,7 @@ export default {
     },
   },
   methods: {
-    building: function (id) {
-      this.$store.commit('building', { id, amount: this.purchaseAmount })
-    },
+    ...mapMutations(['build']),
   },
 }
 </script>

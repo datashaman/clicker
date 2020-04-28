@@ -12,12 +12,12 @@
           </div>
         </div>
 
-        <div class="text-lg">
+        <div class="text-lg font-bold">
           <fa-icon icon="bolt" />
           {{ renderAmount(Math.round(clicks)) }}
         </div>
 
-        <div>
+        <div class="text-xs font-light">
           <fa-icon icon="bolt" />
           {{ renderAmount(cps) }} CpS
         </div>
@@ -26,32 +26,53 @@
 
     <div class="flex-none m-4 w-48">
       <ul>
-        <li v-for="(defn, id) in buildings" :key="id">
-          <Building :id="id" :purchaseAmount="purchaseAmount" />
+        <li
+          v-for="amount in purchaseAmounts"
+          :key="amount"
+          class="w-1/3 inline-block text-center"
+          @click="setPurchaseAmount({ amount })"
+        >
+          <template v-if="amount === purchaseAmount">
+            <div class="font-bold">
+              {{ amount }}
+            </div>
+          </template>
+          <template v-else>
+            <div class="font-light">
+              {{ amount }}
+            </div>
+          </template>
         </li>
       </ul>
+      <BuildingList />
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import Building from '~/components/Building'
+import { mapMutations, mapState } from 'vuex'
+import BuildingList from '~/components/BuildingList'
 import costs from '~/mixins/costs'
 
 export default {
   components: {
-    Building,
+    BuildingList,
   },
   mixins: [costs],
   data: () => {
     return {
       manualCps: 0,
-      purchaseAmount: 1,
     }
   },
   computed: {
-    ...mapState(['buildings', 'clicks', 'factor', 'upgrades']),
+    ...mapState([
+      'buildings',
+      'clicks',
+      'factor',
+      'purchaseAmount',
+      'purchaseAmounts',
+      'upgrades',
+    ]),
     cps: function () {
       return (
         this.manualCps +
@@ -77,9 +98,7 @@ export default {
     })
   },
   methods: {
-    building: function (id, amount) {
-      this.$store.commit('building', { id, amount })
-    },
+    ...mapMutations(['setPurchaseAmount', 'upgrade']),
     click: function () {
       this.$store.commit('click', { amount: this.factor })
       this.manualCps += this.factor
@@ -89,18 +108,15 @@ export default {
     },
     keydown: function (e) {
       if (e.ctrlKey) {
-        this.purchaseAmount = 10
+        this.setPurchaseAmount({ amount: 10 })
       } else if (e.shiftKey) {
-        this.purchaseAmount = 100
+        this.setPurchaseAmount({ amount: 100 })
       } else {
-        this.purchaseAmount = 1
+        this.setPurchaseAmount({ amount: 1 })
       }
     },
     keyup: function () {
-      this.purchaseAmount = 1
-    },
-    upgrade: function (id) {
-      this.$store.commit('upgrade', { id })
+      this.setPurchaseAmount({ amount: 1 })
     },
   },
 }

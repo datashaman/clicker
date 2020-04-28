@@ -42,23 +42,28 @@ export const state = () => ({
   },
   clicks: 0,
   factor: 1,
+  purchaseAmount: 1,
+  purchaseAmounts: [1, 10, 100],
   upgrades: {},
 })
 
 export const mutations = {
-  building(state, { id, amount }) {
+  build(state, { id }) {
     let building = state.buildings[id]
-    let cost = costs.methods.buildingCost(building, amount)
+    let cost = costs.methods.buildingCost(building, state.purchaseAmount)
 
     if (cost <= state.clicks) {
       state.clicks = Math.round(state.clicks - cost)
-      state.buildings[id].count += amount
+      state.buildings[id].count += state.purchaseAmount
     } else {
-      console.error('cannot afford this')
+      console.error('cannot afford this', { cost, clicks: state.clicks })
     }
   },
   click(state, { amount }) {
     state.clicks += amount
+  },
+  setPurchaseAmount(state, { amount }) {
+    state.purchaseAmount = amount
   },
   upgrade(state, { id }) {
     let upgrade = state.upgrades[id]
@@ -73,7 +78,10 @@ export const mutations = {
       state.clicks = Math.round(state.clicks - upgrade.cost)
       upgrade.bought = true
     } else {
-      console.error('cannot afford this')
+      console.error('cannot afford this', {
+        cost: upgrade.cost,
+        clicks: state.clicks,
+      })
     }
   },
 }
