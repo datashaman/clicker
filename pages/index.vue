@@ -4,8 +4,8 @@
       <ClickPanel />
     </div>
 
-    <div class="flex-none mt-4 w-48">
-      <PurchaseAmountSelect />
+    <div class="flex-none mt-4 w-56">
+      <CommercePanel />
       <BuildingList />
     </div>
   </div>
@@ -15,14 +15,14 @@
 import { mapMutations, mapState } from 'vuex'
 import BuildingList from '~/components/BuildingList'
 import ClickPanel from '~/components/ClickPanel'
-import PurchaseAmountSelect from '~/components/PurchaseAmountSelect'
+import CommercePanel from '~/components/CommercePanel'
 import costs from '~/mixins/costs'
 
 export default {
   components: {
     BuildingList,
     ClickPanel,
-    PurchaseAmountSelect,
+    CommercePanel,
   },
   mixins: [costs],
   data: () => {
@@ -41,12 +41,10 @@ export default {
           this.$store.commit('click', { amount: building.count * building.cps })
         }, 1000)
       })
-
-      this.resetPaymentAmount()
     })
   },
   methods: {
-    ...mapMutations(['resetPaymentAmount']),
+    ...mapMutations(['resetCommerceAmount']),
     click: function () {
       this.$store.commit('click', { amount: this.factor })
       this.manualCps += this.factor

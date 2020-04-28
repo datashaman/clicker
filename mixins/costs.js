@@ -15,15 +15,23 @@ export default {
   },
   methods: {
     buildingCost(building, amount) {
+      if (amount >= 0) {
+        return Math.round(
+          (building.cost *
+            (1.15 ** (building.count + amount) - 1.15 ** building.count)) /
+            0.15
+        )
+      }
+
       return Math.round(
         (building.cost *
-          (1.15 ** (building.count + amount) - 1.15 ** building.count)) /
+          (1.15 ** building.count - 1.15 ** (building.count + amount))) /
           0.15
       )
     },
     renderAmount(amount) {
       if (amount < 1000) {
-        return amount
+        return Number(amount.toFixed(3))
       }
 
       let selected = null

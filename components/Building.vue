@@ -1,5 +1,5 @@
 <template>
-  <div :class="buildingClass" @click="build({ id })">
+  <div :class="buildingClass" @click="commerce({ id })">
     <div class="text-2xl">
       <div class="float-right">
         {{ definition.count }}
@@ -7,7 +7,7 @@
       {{ id }}
     </div>
     <div class="text-sm">
-      <template v-if="purchaseAmount > 1"> +{{ purchaseAmount }} </template>
+      <template v-if="commerceAmount > 1"> +{{ commerceAmount }} </template>
       <fa-icon icon="bolt" /> {{ renderAmount(cost) }}
     </div>
   </div>
@@ -26,24 +26,30 @@ export default {
     },
   },
   computed: {
-    ...mapState(['buildings', 'purchaseAmount']),
+    ...mapState(['buildings', 'commerceAmount', 'commerceOperation']),
     amount: function () {
       return 1
     },
     buildingClass: function () {
-      return this.cost <= this.$store.state.clicks
+      if (this.commerceOperation === 'buy') {
+        return this.cost <= this.$store.state.clicks
+          ? 'font-bold cursor-pointer px-2'
+          : 'text-gray-700 px-2'
+      }
+
+      return this.definition.count > 0
         ? 'font-bold cursor-pointer px-2'
-        : 'text-gray-700 font-hairline px-2'
+        : 'text-gray-700 px-2'
     },
     cost: function () {
-      return this.buildingCost(this.definition, this.purchaseAmount)
+      return this.buildingCost(this.definition, this.commerceAmount)
     },
     definition: function () {
       return this.buildings[this.id]
     },
   },
   methods: {
-    ...mapMutations(['build']),
+    ...mapMutations(['commerce']),
   },
 }
 </script>

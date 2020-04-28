@@ -41,36 +41,53 @@ export const state = () => ({
     },
   },
   clicks: 0,
-  defaultPurchaseAmount: 1,
+  commerceAmount: 1,
+  commerceAmounts: [1, 10, 100],
+  commerceOperation: 'buy',
+  defaultCommerceAmount: 1,
   factor: 1,
-  purchaseAmount: 1,
-  purchaseAmounts: [1, 10, 100],
   upgrades: {},
 })
 
 export const mutations = {
-  build(state, { id }) {
+  commerce(state, { id }) {
     let building = state.buildings[id]
-    let cost = costs.methods.buildingCost(building, state.purchaseAmount)
 
-    if (cost <= state.clicks) {
-      state.clicks = Math.round(state.clicks - cost)
-      state.buildings[id].count += state.purchaseAmount
+    if (state.commerceOperation === 'buy') {
+      let cost = costs.methods.buildingCost(building, state.commerceAmount)
+      if (cost <= state.clicks) {
+        state.clicks = Math.max(0, Math.round(state.clicks - cost))
+        state.buildings[id].count += state.commerceAmount
+      } else {
+        console.error('cannot afford this', { cost, clicks: state.clicks })
+      }
+    } else if (state.commerceOperation === 'sell') {
+      let amount = Math.min(state.commerceAmount, building.count)
+      let cost = costs.methods.buildingCost(building, -amount)
+      if (cost) {
+        state.clicks = Math.max(0, Math.round(state.clicks + cost / 2))
+        state.buildings[id].count -= amount
+      }
     } else {
-      console.error('cannot afford this', { cost, clicks: state.clicks })
+      throw new Error(
+        'Unhandled commerce operation: ' + state.commerceOperation
+      )
     }
   },
   click(state, { amount }) {
     state.clicks += amount
   },
-  resetPurchaseAmount(state) {
-    state.purchaseAmount = state.defaultPurchaseAmount
+  resetCommerceAmount(state) {
+    state.commerceAmount = state.defaultCommerceAmount
   },
-  setDefaultPurchaseAmount(state, { amount }) {
-    state.purchaseAmount = state.defaultPurchaseAmount = amount
+  setDefaultCommerceAmount(state, { amount }) {
+    state.commerceAmount = state.defaultCommerceAmount = amount
   },
-  setPurchaseAmount(state, { amount }) {
-    state.purchaseAmount = amount
+  setCommerceAmount(state, { amount }) {
+    state.commerceAmount = amount
+  },
+  setCommerceOperation(state, { operation }) {
+    state.commerceOperation = operation
   },
   upgrade(state, { id }) {
     let upgrade = state.upgrades[id]

@@ -4,8 +4,8 @@
       <div class="h-28">
         <fa-icon
           icon="bolt"
-          class="h-20 cursor-pointer text-4xl hover:text-6xl"
-          @click.prevent="click"
+          class="h-20 cursor-pointer text-4xl hover:text-5xl"
+          @click="click"
         />
       </div>
     </div>
@@ -44,16 +44,6 @@ export default {
         }, 0)
       )
     },
-  },
-  mounted: function () {
-    this.$nextTick(() => {
-      Object.keys(this.buildings).forEach((id) => {
-        setInterval(() => {
-          let building = this.buildings[id]
-          this.$store.commit('click', { amount: building.count * building.cps })
-        }, 1000)
-      })
-    })
   },
   methods: {
     click: function () {
