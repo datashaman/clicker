@@ -29,8 +29,8 @@
         <li
           v-for="amount in purchaseAmounts"
           :key="amount"
-          class="w-1/3 inline-block text-center"
-          @click="setPurchaseAmount({ amount })"
+          class="w-1/3 inline-block text-center cursor-pointer"
+          @click="setDefaultPurchaseAmount({ amount })"
         >
           <template v-if="amount === purchaseAmount">
             <div class="font-bold">
@@ -98,7 +98,12 @@ export default {
     })
   },
   methods: {
-    ...mapMutations(['setPurchaseAmount', 'upgrade']),
+    ...mapMutations([
+      'resetPurchaseAmount',
+      'setDefaultPurchaseAmount',
+      'setPurchaseAmount',
+      'upgrade',
+    ]),
     click: function () {
       this.$store.commit('click', { amount: this.factor })
       this.manualCps += this.factor
@@ -112,11 +117,11 @@ export default {
       } else if (e.shiftKey) {
         this.setPurchaseAmount({ amount: 100 })
       } else {
-        this.setPurchaseAmount({ amount: 1 })
+        this.resetPurchaseAmount()
       }
     },
     keyup: function () {
-      this.setPurchaseAmount({ amount: 1 })
+      this.resetPurchaseAmount()
     },
   },
 }

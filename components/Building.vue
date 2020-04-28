@@ -1,5 +1,5 @@
 <template>
-  <div :class="buildingClass" @click="build({ id })">
+  <div :class="buildingClass + ' p-2'" @click="build({ id })">
     <div class="text-2xl">
       <div class="float-right">{{ definition.count }}</div>
       {{ id }}

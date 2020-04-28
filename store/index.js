@@ -41,6 +41,7 @@ export const state = () => ({
     },
   },
   clicks: 0,
+  defaultPurchaseAmount: 1,
   factor: 1,
   purchaseAmount: 1,
   purchaseAmounts: [1, 10, 100],
@@ -61,6 +62,12 @@ export const mutations = {
   },
   click(state, { amount }) {
     state.clicks += amount
+  },
+  resetPurchaseAmount(state) {
+    state.purchaseAmount = state.defaultPurchaseAmount
+  },
+  setDefaultPurchaseAmount(state, { amount }) {
+    state.purchaseAmount = state.defaultPurchaseAmount = amount
   },
   setPurchaseAmount(state, { amount }) {
     state.purchaseAmount = amount
