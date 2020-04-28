@@ -1,11 +1,13 @@
 <template>
   <div :class="buildingClass + ' p-2'" @click="build({ id })">
     <div class="text-2xl">
-      <div class="float-right">{{ definition.count }}</div>
+      <div class="float-right">
+        {{ definition.count }}
+      </div>
       {{ id }}
     </div>
     <div>
-      <template v-if="purchaseAmount > 1">x{{ purchaseAmount }}</template>
+      <template v-if="purchaseAmount > 1"> x{{ purchaseAmount }} </template>
       <fa-icon icon="bolt" />
       {{ renderAmount(cost) }}
     </div>

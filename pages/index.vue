@@ -24,26 +24,8 @@
       </div>
     </div>
 
-    <div class="flex-none m-4 w-48">
-      <ul>
-        <li
-          v-for="amount in purchaseAmounts"
-          :key="amount"
-          class="w-1/3 inline-block text-center cursor-pointer"
-          @click="setDefaultPurchaseAmount({ amount })"
-        >
-          <template v-if="amount === purchaseAmount">
-            <div class="font-bold">
-              {{ amount }}
-            </div>
-          </template>
-          <template v-else>
-            <div class="font-light">
-              {{ amount }}
-            </div>
-          </template>
-        </li>
-      </ul>
+    <div class="flex-none mt-4 w-48">
+      <PurchaseAmountSelect />
       <BuildingList />
     </div>
   </div>
@@ -52,11 +34,13 @@
 <script>
 import { mapMutations, mapState } from 'vuex'
 import BuildingList from '~/components/BuildingList'
+import PurchaseAmountSelect from '~/components/PurchaseAmountSelect'
 import costs from '~/mixins/costs'
 
 export default {
   components: {
     BuildingList,
+    PurchaseAmountSelect,
   },
   mixins: [costs],
   data: () => {
@@ -65,14 +49,7 @@ export default {
     }
   },
   computed: {
-    ...mapState([
-      'buildings',
-      'clicks',
-      'factor',
-      'purchaseAmount',
-      'purchaseAmounts',
-      'upgrades',
-    ]),
+    ...mapState(['buildings', 'clicks', 'factor', 'upgrades']),
     cps: function () {
       return (
         this.manualCps +
@@ -92,36 +69,16 @@ export default {
           this.$store.commit('click', { amount: building.count * building.cps })
         }, 1000)
       })
-
-      window.addEventListener('keydown', this.keydown)
-      window.addEventListener('keyup', this.keyup)
     })
   },
   methods: {
-    ...mapMutations([
-      'resetPurchaseAmount',
-      'setDefaultPurchaseAmount',
-      'setPurchaseAmount',
-      'upgrade',
-    ]),
+    ...mapMutations(['upgrade']),
     click: function () {
       this.$store.commit('click', { amount: this.factor })
       this.manualCps += this.factor
       setTimeout(() => {
         this.manualCps -= this.factor
       }, 1000)
-    },
-    keydown: function (e) {
-      if (e.ctrlKey) {
-        this.setPurchaseAmount({ amount: 10 })
-      } else if (e.shiftKey) {
-        this.setPurchaseAmount({ amount: 100 })
-      } else {
-        this.resetPurchaseAmount()
-      }
-    },
-    keyup: function () {
-      this.resetPurchaseAmount()
     },
   },
 }
