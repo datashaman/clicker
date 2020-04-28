@@ -1,106 +1,88 @@
 import costs from '~/mixins/costs'
 
+const units = {
+  kilo: 1000 ** 1,
+  mega: 1000 ** 2,
+  giga: 1000 ** 3,
+  tera: 1000 ** 4,
+  peta: 1000 ** 5,
+  exa: 1000 ** 6,
+  zetta: 1000 ** 7,
+  yotta: 1000 ** 8,
+}
+
 export const state = () => ({
   buildings: {
-    A: {
-      count: 0,
-      cost: 10,
-      costFactor: 0.1,
-      cps: 10,
+    cursor: {
+      count: 10,
+      cost: 15,
+      cps: 0.1,
     },
-    B: {
-      count: 0,
+    cpu: {
+      count: 5,
       cost: 100,
-      costFactor: 0.2,
-      cps: 100,
+      cps: 1,
     },
-    C: {
+    process: {
       count: 0,
-      cost: 1000,
-      costFactor: 0.4,
-      cps: 1000,
+      cost: 1.1 * units.kilo,
+      cps: 8,
+    },
+    service: {
+      count: 0,
+      cost: 12 * units.kilo,
+      cps: 47,
+    },
+    computer: {
+      count: 0,
+      cost: 130 * units.kilo,
+      cps: 260,
+    },
+    cluster: {
+      count: 0,
+      cost: 1.4 * units.mega,
+      cps: 1.4 * units.kilo,
+    },
+    dataCenter: {
+      count: 0,
+      cost: 20 * units.mega,
+      cps: 7.8 * units.kilo,
     },
   },
   clicks: 0,
   factor: 1,
-  upgrades: {
-    'manual': {
-      bought: false,
-      cost: 1000,
-      factor: 0.05,
-      title: 'Manual',
-      required: 100,
-    },
-    'manual++': {
-      bought: false,
-      cost: 5000,
-      factor: 0.05,
-      title: 'Manual++',
-      required: 1000,
-    },
-    'a+': {
-      bought: false,
-      cost: 5000,
-      building: 'A',
-      factor: 0.05,
-      title: 'A+',
-      required: 100,
-    },
-    'a++': {
-      bought: false,
-      cost: 10000,
-      building: 'A',
-      factor: 0.1,
-      title: 'A++',
-      required: 1000,
-    },
-    'b+': {
-      bought: false,
-      cost: 50000,
-      building: 'B',
-      factor: 0.05,
-      title: 'B+',
-      required: 10000,
-    },
-    'c+': {
-      bought: false,
-      cost: 100000,
-      building: 'C',
-      factor: 0.05,
-      title: 'C+',
-      required: 100000,
-    },
-  },
+  upgrades: {},
 })
 
 export const mutations = {
-  building (state, { id, amount }) {
+  building(state, { id, amount }) {
     let building = state.buildings[id]
     let cost = costs.methods.buildingCost(building, amount)
 
     if (cost <= state.clicks) {
-      state.clicks -= cost
+      state.clicks = Math.round(state.clicks - cost)
       state.buildings[id].count += amount
     } else {
       console.error('cannot afford this')
     }
   },
-  click (state, { amount }) {
+  click(state, { amount }) {
     state.clicks += amount
   },
-  upgrade (state, { id }) {
+  upgrade(state, { id }) {
     let upgrade = state.upgrades[id]
 
     if (upgrade.cost <= state.clicks) {
       if (upgrade.building) {
-        state.buildings[upgrade.building].cps += state.buildings[upgrade.building].cps * upgrade.factor
+        state.buildings[upgrade.building].cps +=
+          state.buildings[upgrade.building].cps * upgrade.factor
       } else {
         state.factor += state.factor * upgrade.factor
       }
-      state.clicks -= upgrade.cost
+      state.clicks = Math.round(state.clicks - upgrade.cost)
       upgrade.bought = true
     } else {
       console.error('cannot afford this')
     }
-  }
+  },
 }

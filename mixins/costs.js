@@ -1,9 +1,11 @@
 export default {
   methods: {
     buildingCost(building, amount) {
-      return building.count
-        ? building.cost * building.costFactor * building.count * amount
-        : building.cost * amount
+      return Math.round(
+        (building.cost *
+          (1.15 ** (building.count + amount) - 1.15 ** building.count)) /
+          0.15
+      )
     },
   },
 }
