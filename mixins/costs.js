@@ -44,7 +44,7 @@ export default {
         return Number((amount / value).toFixed(3)) + selected[0].toUpperCase()
       }
 
-      throw new Error('Cannot find unit for amount')
+      throw new Error('Cannot find unit for amount: ' + amount)
     },
   },
 }

@@ -23,7 +23,7 @@ export default {
       type: String,
       default: '',
     },
-    scale: {
+    purchaseAmount: {
       type: Number,
       default: 1,
     },
@@ -39,7 +39,7 @@ export default {
         : 'text-gray-700 font-hairline'
     },
     cost: function () {
-      return this.buildingCost(this.definition, this.scale)
+      return this.buildingCost(this.definition, this.purchaseAmount)
     },
     definition: function () {
       return this.buildings[this.id]
@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     building: function (id) {
-      this.$store.commit('building', { id, amount: this.scale })
+      this.$store.commit('building', { id, amount: this.purchaseAmount })
     },
   },
 }

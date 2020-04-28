@@ -1,5 +1,5 @@
 <template>
-  <div class="flex" @selectstart.prevent>
+  <div class="container flex" @selectstart.prevent>
     <div class="flex-none w-40">
       <div class="text-center">
         <div class="bg-red-400 m-4">
@@ -12,17 +12,22 @@
           </div>
         </div>
 
-        <h2>
+        <div class="text-lg">
           <fa-icon icon="bolt" />
           {{ renderAmount(Math.round(clicks)) }}
-        </h2>
+        </div>
+
+        <div>
+          <fa-icon icon="bolt" />
+          {{ renderAmount(cps) }} CpS
+        </div>
       </div>
     </div>
 
     <div class="flex-none m-4 w-48">
       <ul>
         <li v-for="(defn, id) in buildings" :key="id">
-          <Building :id="id" :scale="scale" />
+          <Building :id="id" :purchaseAmount="purchaseAmount" />
         </li>
       </ul>
     </div>
@@ -41,11 +46,22 @@ export default {
   mixins: [costs],
   data: () => {
     return {
-      scale: 1,
+      manualCps: 0,
+      purchaseAmount: 1,
     }
   },
   computed: {
-    ...mapState(['buildings', 'clicks', 'cps', 'factor', 'upgrades']),
+    ...mapState(['buildings', 'clicks', 'factor', 'upgrades']),
+    cps: function () {
+      return (
+        this.manualCps +
+        Object.keys(this.buildings).reduce((acc, id) => {
+          let building = this.buildings[id]
+          acc += building.count * building.cps
+          return acc
+        }, 0)
+      )
+    },
   },
   mounted: function () {
     this.$nextTick(() => {
@@ -66,18 +82,22 @@ export default {
     },
     click: function () {
       this.$store.commit('click', { amount: this.factor })
+      this.manualCps += this.factor
+      setTimeout(() => {
+        this.manualCps -= this.factor
+      }, 1000)
     },
     keydown: function (e) {
       if (e.ctrlKey) {
-        this.scale = 10
+        this.purchaseAmount = 10
       } else if (e.shiftKey) {
-        this.scale = 100
+        this.purchaseAmount = 100
       } else {
-        this.scale = 1
+        this.purchaseAmount = 1
       }
     },
     keyup: function () {
-      this.scale = 1
+      this.purchaseAmount = 1
     },
     upgrade: function (id) {
       this.$store.commit('upgrade', { id })
