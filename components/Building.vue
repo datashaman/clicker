@@ -1,15 +1,14 @@
 <template>
-  <div :class="buildingClass + ' p-2'" @click="build({ id })">
+  <div :class="buildingClass" @click="build({ id })">
     <div class="text-2xl">
       <div class="float-right">
         {{ definition.count }}
       </div>
       {{ id }}
     </div>
-    <div>
-      <template v-if="purchaseAmount > 1"> x{{ purchaseAmount }} </template>
-      <fa-icon icon="bolt" />
-      {{ renderAmount(cost) }}
+    <div class="text-sm">
+      <template v-if="purchaseAmount > 1"> +{{ purchaseAmount }} </template>
+      <fa-icon icon="bolt" /> {{ renderAmount(cost) }}
     </div>
   </div>
 </template>
@@ -33,8 +32,8 @@ export default {
     },
     buildingClass: function () {
       return this.cost <= this.$store.state.clicks
-        ? 'font-bold cursor-pointer'
-        : 'text-gray-700 font-hairline'
+        ? 'font-bold cursor-pointer px-2'
+        : 'text-gray-700 font-hairline px-2'
     },
     cost: function () {
       return this.buildingCost(this.definition, this.purchaseAmount)

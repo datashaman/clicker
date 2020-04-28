@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
-    <div class="bg-red-400 m-4">
-      <div class="h-20">
+    <div class="bg-red-400 m-4 rounded-lg shadow">
+      <div class="h-28">
         <fa-icon
           icon="bolt"
           class="h-20 cursor-pointer text-4xl hover:text-6xl"
@@ -17,7 +17,7 @@
 
     <div class="text-xs font-light">
       <fa-icon icon="bolt" />
-      {{ renderAmount(cps) }} CpS
+      {{ renderAmount(cps) }}/s
     </div>
   </div>
 </template>
