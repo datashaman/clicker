@@ -2,9 +2,9 @@
   <div class="flex" @selectstart.prevent>
     <div class="flex-none w-40" @click.prevent="click">
       <div class="text-center">
-        <div class="bg-red-400">
-          <div class="h-20">
-            click here
+        <div class="bg-red-400 m-4">
+          <div class="h-20 text-5xl cursor-pointer">
+            <fa-icon icon="bolt" />
           </div>
         </div>
 
@@ -15,24 +15,7 @@
       </div>
     </div>
 
-    <div class="flex-grow">
-      <h3>Upgrades</h3>
-
-      <ul>
-        <template v-for="(defn, id) in upgrades">
-          <li v-if="clicks >= defn.required || defn.bought" :key="id">
-            <div v-if="defn.bought">
-              <strike>{{ defn.title }}</strike>
-            </div>
-            <a v-else @click.prevent="upgrade(id)">
-              {{ defn.title }} ({{ defn.cost }})
-            </a>
-          </li>
-        </template>
-      </ul>
-
-      <h3>Buildings</h3>
-
+    <div class="flex-none m-4 w-48">
       <ul>
         <li v-for="(defn, id) in buildings" :key="id">
           <Building :id="id" :scale="scale" />
