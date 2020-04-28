@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 import BuildingList from '~/components/BuildingList'
 import ClickPanel from '~/components/ClickPanel'
 import PurchaseAmountSelect from '~/components/PurchaseAmountSelect'
@@ -41,9 +41,12 @@ export default {
           this.$store.commit('click', { amount: building.count * building.cps })
         }, 1000)
       })
+
+      this.resetPaymentAmount()
     })
   },
   methods: {
+    ...mapMutations(['resetPaymentAmount']),
     click: function () {
       this.$store.commit('click', { amount: this.factor })
       this.manualCps += this.factor
