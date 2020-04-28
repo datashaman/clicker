@@ -9,5 +9,7 @@ module.exports = {
       padding: '2rem',
     },
   },
-  variants: {},
+  variants: {
+    fontSize: ['hover'],
+  },
 }

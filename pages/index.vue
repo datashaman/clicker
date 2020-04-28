@@ -1,10 +1,14 @@
 <template>
   <div class="flex" @selectstart.prevent>
-    <div class="flex-none w-40" @click.prevent="click">
+    <div class="flex-none w-40">
       <div class="text-center">
         <div class="bg-red-400 m-4">
-          <div class="h-20 text-5xl cursor-pointer">
-            <fa-icon icon="bolt" />
+          <div class="h-20">
+            <fa-icon
+              icon="bolt"
+              class="h-20 cursor-pointer text-4xl hover:text-6xl"
+              @click.prevent="click"
+            />
           </div>
         </div>
 
