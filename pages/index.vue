@@ -1,53 +1,61 @@
 <template>
-  <div class="container" @selectstart.prevent>
-    <h1 class="title" @click.prevent="click">
-      click here
-    </h1>
-
-    <h2>
-      {{ Math.round(clicks) }}
-    </h2>
-
-    <h3>Upgrades</h3>
-
-    <ul>
-      <template v-for="(defn, id) in upgrades">
-        <li v-if="clicks >= defn.required || defn.bought" :key="id">
-          <div v-if="defn.bought">
-            <strike>{{ defn.title }}</strike>
+  <div class="flex" @selectstart.prevent>
+    <div class="flex-none w-40" @click.prevent="click">
+      <div class="text-center">
+        <div class="bg-red-400">
+          <div class="h-20">
+            click here
           </div>
-          <a v-else @click.prevent="upgrade(id)">
-            {{ defn.title }} ({{ defn.cost }})
-          </a>
+        </div>
+
+        <h2>
+          {{ renderAmount(Math.round(clicks)) }}
+        </h2>
+      </div>
+    </div>
+
+    <div class="flex-grow">
+      <h3>Upgrades</h3>
+
+      <ul>
+        <template v-for="(defn, id) in upgrades">
+          <li v-if="clicks >= defn.required || defn.bought" :key="id">
+            <div v-if="defn.bought">
+              <strike>{{ defn.title }}</strike>
+            </div>
+            <a v-else @click.prevent="upgrade(id)">
+              {{ defn.title }} ({{ defn.cost }})
+            </a>
+          </li>
+        </template>
+      </ul>
+
+      <h3>Buildings</h3>
+
+      <ul>
+        <li v-for="(defn, id) in buildings" :key="id">
+          <Building :id="id" :scale="scale" />
         </li>
-      </template>
-    </ul>
-
-    <h3>Buildings</h3>
-
-    <ul>
-      <li v-for="(defn, id) in buildings" :key="id">
-        {{ id }} {{ defn.count }} x {{ defn.cps }}cps:
-        <a @click.prevent="building(id, 1)">
-          +1 ({{ buildingCost(defn, 1) }})
-        </a>
-        <a @click.prevent="building(id, 10)">
-          +10 ({{ buildingCost(defn, 10) }})
-        </a>
-        <a @click.prevent="building(id, 100)">
-          +100 ({{ buildingCost(defn, 100) }})
-        </a>
-      </li>
-    </ul>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import Building from '~/components/Building'
 import costs from '~/mixins/costs'
 
 export default {
+  components: {
+    Building,
+  },
   mixins: [costs],
+  data: () => {
+    return {
+      scale: 1,
+    }
+  },
   computed: {
     ...mapState(['buildings', 'clicks', 'cps', 'factor', 'upgrades']),
   },
@@ -59,6 +67,9 @@ export default {
           this.$store.commit('click', { amount: building.count * building.cps })
         }, 1000)
       })
+
+      window.addEventListener('keydown', this.keydown)
+      window.addEventListener('keyup', this.keyup)
     })
   },
   methods: {
@@ -67,6 +78,19 @@ export default {
     },
     click: function () {
       this.$store.commit('click', { amount: this.factor })
+    },
+    keydown: function (e) {
+      console.log(e)
+      if (e.ctrlKey) {
+        this.scale = 10
+      } else if (e.shiftKey) {
+        this.scale = 100
+      } else {
+        this.scale = 1
+      }
+    },
+    keyup: function () {
+      this.scale = 1
     },
     upgrade: function (id) {
       this.$store.commit('upgrade', { id })

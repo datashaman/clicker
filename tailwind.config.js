@@ -3,6 +3,11 @@ module.exports = {
   plugins: [],
   prefix: '',
   separator: ':',
-  theme: {},
+  theme: {
+    container: {
+      center: true,
+      padding: '2rem',
+    },
+  },
   variants: {},
 }

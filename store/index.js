@@ -1,15 +1,6 @@
 import costs from '~/mixins/costs'
 
-const units = {
-  kilo: 1000 ** 1,
-  mega: 1000 ** 2,
-  giga: 1000 ** 3,
-  tera: 1000 ** 4,
-  peta: 1000 ** 5,
-  exa: 1000 ** 6,
-  zetta: 1000 ** 7,
-  yotta: 1000 ** 8,
-}
+const units = costs.data().units
 
 export const state = () => ({
   buildings: {
