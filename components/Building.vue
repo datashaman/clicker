@@ -1,5 +1,5 @@
 <template>
-  <div @click.prevent="building(id)">
+  <div :class="buildingClass" @click.prevent="building(id)">
     <div class="text-2xl">{{ id }} {{ definition.count }}</div>
     <div class="text-lg">
       <template v-if="scale > 1">x{{ scale }}</template>
@@ -29,6 +29,11 @@ export default {
     ...mapState(['buildings']),
     amount: function () {
       return 1
+    },
+    buildingClass: function () {
+      return this.cost <= this.$store.state.clicks
+        ? 'font-bold cursor-pointer'
+        : 'text-gray-700 font-hairline'
     },
     cost: function () {
       return this.buildingCost(this.definition, this.scale)
