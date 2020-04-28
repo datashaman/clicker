@@ -1,29 +1,31 @@
 <template>
-  <div class="container flex" @selectstart.prevent>
-    <div class="flex-none w-40">
-      <ClickPanel />
+  <div class="text-center">
+    <div class="bg-red-400 m-4">
+      <div class="h-20">
+        <fa-icon
+          icon="bolt"
+          class="h-20 cursor-pointer text-4xl hover:text-6xl"
+          @click.prevent="click"
+        />
+      </div>
     </div>
 
-    <div class="flex-none mt-4 w-48">
-      <PurchaseAmountSelect />
-      <BuildingList />
+    <div class="text-lg font-bold">
+      <fa-icon icon="bolt" />
+      {{ renderAmount(Math.round(clicks)) }}
+    </div>
+
+    <div class="text-xs font-light">
+      <fa-icon icon="bolt" />
+      {{ renderAmount(cps) }} CpS
     </div>
   </div>
 </template>
-
 <script>
 import { mapState } from 'vuex'
-import BuildingList from '~/components/BuildingList'
-import ClickPanel from '~/components/ClickPanel'
-import PurchaseAmountSelect from '~/components/PurchaseAmountSelect'
 import costs from '~/mixins/costs'
 
 export default {
-  components: {
-    BuildingList,
-    ClickPanel,
-    PurchaseAmountSelect,
-  },
   mixins: [costs],
   data: () => {
     return {
@@ -32,6 +34,16 @@ export default {
   },
   computed: {
     ...mapState(['buildings', 'clicks', 'factor']),
+    cps: function () {
+      return (
+        this.manualCps +
+        Object.keys(this.buildings).reduce((acc, id) => {
+          let building = this.buildings[id]
+          acc += building.count * building.cps
+          return acc
+        }, 0)
+      )
+    },
   },
   mounted: function () {
     this.$nextTick(() => {
