@@ -43,7 +43,21 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ['nuxt-purgecss'],
+  modules: [
+    'nuxt-purgecss',
+    [
+      'nuxt-fontawesome',
+      {
+        component: 'fa-icon',
+        imports: [
+          {
+            set: '@fortawesome/free-solid-svg-icons',
+            icons: ['faBolt'],
+          },
+        ],
+      },
+    ],
+  ],
   /*
    ** Build configuration
    */

@@ -3,6 +3,7 @@
     <div class="text-2xl">{{ id }} {{ definition.count }}</div>
     <div class="text-lg">
       <template v-if="scale > 1">x{{ scale }}</template>
+      <fa-icon icon="bolt" />
       {{ renderAmount(cost) }}
     </div>
   </div>

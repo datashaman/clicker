@@ -9,6 +9,7 @@
         </div>
 
         <h2>
+          <fa-icon icon="bolt" />
           {{ renderAmount(Math.round(clicks)) }}
         </h2>
       </div>
@@ -80,7 +81,6 @@ export default {
       this.$store.commit('click', { amount: this.factor })
     },
     keydown: function (e) {
-      console.log(e)
       if (e.ctrlKey) {
         this.scale = 10
       } else if (e.shiftKey) {

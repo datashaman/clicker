@@ -16,6 +16,7 @@
     "nuxt": "^2.0.0"
   },
   "devDependencies": {
+    "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@nuxtjs/stylelint-module": "^3.1.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.8.0",
@@ -25,6 +26,7 @@
     "eslint-plugin-vue": "^6.2.2",
     "install": "^0.13.0",
     "node-sass": "^4.14.0",
+    "nuxt-fontawesome": "^0.4.0",
     "nuxt-purgecss": "^1.0.0",
     "prettier": "^2.0.5",
     "sass-loader": "^8.0.2",
