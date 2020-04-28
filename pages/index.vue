@@ -87,15 +87,10 @@ export default {
   mounted: function () {
     this.$nextTick(() => {
       Object.keys(this.buildings).forEach((id) => {
-        let building = this.buildings[id]
-
-        for (let i = 0; i < building.count; i++) {
-          setTimeout(() => {
-            setInterval(() => {
-              this.$store.commit('click', { amount: building.cps })
-            }, 1000)
-          }, (i / building.cost) * 1000)
-        }
+        setInterval(() => {
+          let building = this.buildings[id]
+          this.$store.commit('click', { amount: building.count * building.cps })
+        }, 1000)
       })
 
       window.addEventListener('keydown', this.keydown)
