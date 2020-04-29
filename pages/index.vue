@@ -2,7 +2,6 @@
   <div class="container flex mt-4" @selectstart.prevent>
     <div class="flex-none w-40">
       <ClickPanel />
-      <button @click="reset">Reset</button>
     </div>
 
     <div class="flex-none mt-4 w-64">
