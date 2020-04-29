@@ -10,7 +10,8 @@
       {{ id }}
     </div>
     <div class="text-sm">
-      <template v-if="commerceAmount > 1"> +{{ commerceAmount }} </template>
+      {{ commerceOperation === 'buy' ? '+' : '-'
+      }}{{ Math.min(definition.count, commerceAmount) }}
       <fa-icon icon="bolt" /> {{ renderAmount(cost) }}
     </div>
   </div>
@@ -36,16 +37,30 @@ export default {
     buildingClass: function () {
       if (this.commerceOperation === 'buy') {
         return this.cost <= this.$store.state.clicks
-          ? 'font-bold cursor-pointer px-2 m-2'
-          : 'text-gray-700 px-2 m-2'
+          ? 'font-bold cursor-pointer px-2 my-2'
+          : 'text-gray-700 px-2 my-2'
       }
 
       return this.definition.count > 0
-        ? 'font-bold cursor-pointer px-2'
-        : 'text-gray-700 px-2'
+        ? 'font-bold cursor-pointer px-2 text-red-700 my-2'
+        : 'text-gray-700 px-2 my-2'
     },
     cost: function () {
-      return this.buildingCost(this.definition, this.commerceAmount)
+      let amount
+
+      if (this.commerceOperation === 'buy') {
+        amount = this.commerceAmount
+      } else {
+        amount = -Math.min(this.definition.count, this.commerceAmount)
+      }
+
+      let result = this.buildingCost(this.definition, amount)
+
+      if (this.commerceOperation === 'sell') {
+        result /= 2
+      }
+
+      return result
     },
     definition: function () {
       return this.buildings[this.id]
