@@ -1,6 +1,12 @@
 # clicker
 
-> Generic clicker
+Generic clicker. Initial build borrows _heavily_ from *cookieclicker*; once I've got the basic building blocks done, I'll make it more unique.
+
+Roadmap:
+
+* add upgrades
+* abstract config into a theme file
+* add fantasy theme
 
 ## Build Setup
 
