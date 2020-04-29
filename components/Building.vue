@@ -14,7 +14,12 @@
         v-if="count"
         class="float-right font-light"
         :title="
-          effectiveCps + '/s per ' + id + '; ' + shareOfCps + '% of total'
+          renderAmount(effectiveCps) +
+          '/s per ' +
+          id +
+          '; ' +
+          shareOfCps +
+          '% of total'
         "
       >
         <fa-icon icon="bolt" />
