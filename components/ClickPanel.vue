@@ -42,14 +42,7 @@ export default {
   computed: {
     ...mapState(['clicks', 'factor', 'buildings', 'resetCounter']),
     cps: function () {
-      return (
-        this.manualCps +
-        Object.keys(this.buildings).reduce((acc, id) => {
-          let building = this.buildings[id]
-          acc += building.count * building.cps
-          return acc
-        }, 0)
-      )
+      return this.manualCps + this.$store.getters.effectiveCps
     },
   },
   methods: {

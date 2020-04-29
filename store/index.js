@@ -30,6 +30,23 @@ const initialState = () => {
 
 export const state = () => initialState()
 
+export const getters = {
+  effectiveCps: function (state) {
+    state = JSON.parse(JSON.stringify(state))
+
+    state.upgrades.forEach((id) => {
+      let upgrade = upgrades[id]
+      upgrade.reward(state)
+    })
+
+    return Object.keys(state.buildings).reduce((acc, key) => {
+      let building = state.buildings[key]
+      acc += building.count * building.cps
+      return acc
+    }, 0)
+  },
+}
+
 export const mutations = {
   commerce(state, { id }) {
     let definition = buildings[id]
@@ -94,7 +111,6 @@ export const mutations = {
     if (upgrade.cost <= state.clicks) {
       state.clicks = Math.round(state.clicks - upgrade.cost)
       state.upgrades.push(id)
-      upgrade.reward(state)
     } else {
       console.error('cannot afford this', {
         cost: upgrade.cost,

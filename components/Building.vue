@@ -10,9 +10,15 @@
       {{ id }}
     </div>
     <div class="text-sm">
-      <div v-if="count" class="float-right font-light">
+      <div
+        v-if="count"
+        class="float-right font-light"
+        :title="
+          effectiveCps + '/s per ' + id + '; ' + shareOfCps + '% of total'
+        "
+      >
         <fa-icon icon="bolt" />
-        {{ renderAmount(count * cps) }}/s
+        {{ renderAmount(count * effectiveCps) }}/s
       </div>
       <template v-if="commerceOperation === 'buy' || count">
         {{ commerceOperation === 'buy' ? '+' : '-'
@@ -30,7 +36,7 @@
 <script>
 import { mapMutations, mapState } from 'vuex'
 import costs from '~/mixins/costs'
-import { buildings } from '~/themes/default'
+import { buildings, upgrades } from '~/themes/default'
 
 export default {
   mixins: [costs],
@@ -83,12 +89,31 @@ export default {
     definition: function () {
       return buildings[this.id]
     },
+    effectiveCps: function () {
+      let state = JSON.parse(JSON.stringify(this.$store.state))
+
+      state.upgrades.forEach((id) => {
+        let upgrade = upgrades[id]
+        upgrade.reward(state)
+      })
+
+      return state.buildings[this.id].cps
+    },
+    shareOfCps: function () {
+      let effectiveCps = this.$store.getters.effectiveCps
+
+      return parseInt(
+        effectiveCps === 0
+          ? 0
+          : ((this.effectiveCps * this.count) / effectiveCps) * 100
+      )
+    },
   },
   mounted: function () {
     this.$nextTick(() => {
       setInterval(() => {
         this.$store.commit('click', {
-          amount: this.count * this.cps,
+          amount: this.count * this.effectiveCps,
         })
       }, 1000)
     })
