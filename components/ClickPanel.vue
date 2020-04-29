@@ -19,6 +19,12 @@
       <fa-icon icon="bolt" />
       {{ renderAmount(cps) }}/s
     </div>
+
+    <div class="mt-12">
+      <button class="p-2 rounded-lg text-white bg-red-800" @click="reset">
+        RESET
+      </button>
+    </div>
   </div>
 </template>
 <script>
@@ -52,6 +58,11 @@ export default {
       setTimeout(() => {
         this.manualCps -= this.factor
       }, 1000)
+    },
+    reset: function () {
+      if (confirm('Are you sure?')) {
+        this.$store.commit('reset')
+      }
     },
   },
 }

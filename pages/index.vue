@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
 import BuildingList from '~/components/BuildingList'
 import ClickPanel from '~/components/ClickPanel'
 import CommercePanel from '~/components/CommercePanel'
@@ -28,9 +27,6 @@ export default {
     ClickPanel,
     CommercePanel,
     UpgradesPanel,
-  },
-  methods: {
-    ...mapMutations(['reset']),
   },
 }
 </script>
