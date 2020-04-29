@@ -31,6 +31,7 @@
 <script>
 import { mapState } from 'vuex'
 import costs from '~/mixins/costs'
+import { upgrades } from '~/themes/default'
 
 export default {
   mixins: [costs],
@@ -47,17 +48,24 @@ export default {
   },
   methods: {
     click: function (e) {
-      this.$store.commit('click', { amount: this.factor })
-      this.manualCps += this.factor
+      let state = JSON.parse(JSON.stringify(this.$store.state))
+
+      state.upgrades.forEach((id) => {
+        let upgrade = upgrades[id]
+        upgrade.reward(state)
+      })
+
+      this.$store.commit('click', { amount: state.factor })
+      this.manualCps += state.factor
 
       let el = document.createElement('DIV')
-      el.innerText = this.factor
+      el.innerText = state.factor
       el.style.color = '#ffffff'
       el.style.backgroundColor = 'transparent'
       el.style.fontWeight = 'bold'
       el.style.position = 'absolute'
       el.style.left = -(Math.random() * 30) + e.pageX + 15 + 'px'
-      el.style.top = -(Math.random() * 15) + e.pageY - 15 + 'px'
+      el.style.top = -(Math.random() * 25) + e.pageY - 25 + 'px'
       el = document.body.appendChild(el)
 
       setTimeout(() => {
