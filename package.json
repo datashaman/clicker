@@ -13,7 +13,9 @@
     "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "nuxt-fontawesome": "^0.4.0",
+    "nuxt-purgecss": "^1.0.0"
   },
   "devDependencies": {
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
@@ -26,8 +28,6 @@
     "eslint-plugin-vue": "^6.2.2",
     "install": "^0.13.0",
     "node-sass": "^4.14.0",
-    "nuxt-fontawesome": "^0.4.0",
-    "nuxt-purgecss": "^1.0.0",
     "prettier": "^2.0.5",
     "sass-loader": "^8.0.2",
     "stylelint": "^10.1.0",
