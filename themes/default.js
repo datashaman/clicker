@@ -73,7 +73,7 @@ export const upgrades = {
   cursor_3: {
     description: 'The mouse and cursors are twice as efficient.',
     name: 'Autoclick v0.1',
-    cost: 10000,
+    cost: 10 * units.kilo,
     icon: 'hand-pointer',
     reward: (state) => {
       state.factor *= 2
@@ -84,7 +84,7 @@ export const upgrades = {
   cpu_1: {
     description: 'The CPUs are twice as efficient.',
     name: 'Silicon Board',
-    cost: 1000,
+    cost: 1 * units.kilo,
     icon: 'microchip',
     reward: (state) => {
       state.buildings.cpu.cps *= 2
@@ -94,7 +94,7 @@ export const upgrades = {
   cpu_2: {
     description: 'The CPUs are twice as efficient.',
     name: 'Heat Sink',
-    cost: 5000,
+    cost: 5 * units.kilo,
     icon: 'microchip',
     reward: (state) => {
       state.buildings.cpu.cps *= 2
@@ -104,7 +104,7 @@ export const upgrades = {
   cpu_3: {
     description: 'The CPUs are twice as efficient.',
     name: 'Thermal Glue',
-    cost: 50000,
+    cost: 50 * units.kilo,
     icon: 'microchip',
     reward: (state) => {
       state.buildings.cpu.cps *= 2
@@ -114,7 +114,7 @@ export const upgrades = {
   process_1: {
     description: 'The processes are twice as efficient.',
     name: 'RAM Upgrade',
-    cost: 11000,
+    cost: 11 * units.kilo,
     icon: 'project-diagram',
     reward: (state) => {
       state.buildings.process.cps *= 2
@@ -124,7 +124,7 @@ export const upgrades = {
   process_2: {
     description: 'The processes are twice as efficient.',
     name: 'Renice Priority -20',
-    cost: 55000,
+    cost: 55 * units.kilo,
     icon: 'project-diagram',
     reward: (state) => {
       state.buildings.process.cps *= 2
@@ -134,7 +134,7 @@ export const upgrades = {
   process_3: {
     description: 'The processes are twice as efficient.',
     name: '64-bit',
-    cost: 550000,
+    cost: 550 * units.kilo,
     icon: 'project-diagram',
     reward: (state) => {
       state.buildings.process.cps *= 2
@@ -144,7 +144,7 @@ export const upgrades = {
   service_1: {
     description: 'The services are twice as efficient.',
     name: 'REST API',
-    cost: 120000,
+    cost: 120 * units.kilo,
     icon: 'cogs',
     reward: (state) => {
       state.buildings.service.cps *= 2
@@ -154,7 +154,7 @@ export const upgrades = {
   service_2: {
     description: 'The services are twice as efficient.',
     name: 'Single Sign-On',
-    cost: 600000,
+    cost: 600 * units.kilo,
     icon: 'cogs',
     reward: (state) => {
       state.buildings.service.cps *= 2
@@ -164,7 +164,7 @@ export const upgrades = {
   service_3: {
     description: 'The services are twice as efficient.',
     name: 'Microservice Architecture',
-    cost: 6000000,
+    cost: 6 * units.mega,
     icon: 'cogs',
     reward: (state) => {
       state.buildings.service.cps *= 2
@@ -174,7 +174,7 @@ export const upgrades = {
   computer_1: {
     description: 'The computers are twice as efficient.',
     name: 'External GPU',
-    cost: 1300000,
+    cost: 1.3 * units.mega,
     icon: 'desktop',
     reward: (state) => {
       state.buildings.computer.cps *= 2
@@ -184,7 +184,7 @@ export const upgrades = {
   computer_2: {
     description: 'The computers are twice as efficient.',
     name: 'Liquid Cooled',
-    cost: 6500000,
+    cost: 6.5 * units.mega,
     icon: 'desktop',
     reward: (state) => {
       state.buildings.computer.cps *= 2
@@ -194,7 +194,7 @@ export const upgrades = {
   computer_3: {
     description: 'The computers are twice as efficient.',
     name: 'Cray-1',
-    cost: 65000000,
+    cost: 65 * units.mega,
     icon: 'desktop',
     reward: (state) => {
       state.buildings.computer.cps *= 2
@@ -204,7 +204,7 @@ export const upgrades = {
   cluster_1: {
     description: 'The clusters are twice as efficient.',
     name: 'Distributed Directory',
-    cost: 14000000,
+    cost: 14 * units.mega,
     icon: 'network-wired',
     reward: (state) => {
       state.buildings.cluster.cps *= 2
@@ -214,7 +214,7 @@ export const upgrades = {
   cluster_2: {
     description: 'The clusters are twice as efficient.',
     name: 'Decentralized Auth',
-    cost: 70000000,
+    cost: 70 * units.mega,
     icon: 'network-wired',
     reward: (state) => {
       state.buildings.cluster.cps *= 2
@@ -224,11 +224,41 @@ export const upgrades = {
   cluster_3: {
     description: 'The clusters are twice as efficient.',
     name: 'Mining Rig',
-    cost: 700000000,
+    cost: 700 * units.mega,
     icon: 'network-wired',
     reward: (state) => {
       state.buildings.cluster.cps *= 2
     },
     unlock: (state) => state.buildings.cluster.count >= 25,
+  },
+  dataCenter_1: {
+    description: 'The dataCenters are twice as efficient.',
+    name: 'Multi Region',
+    cost: 200 * units.mega,
+    icon: 'database',
+    reward: (state) => {
+      state.buildings.dataCenter.cps *= 2
+    },
+    unlock: (state) => state.buildings.dataCenter.count >= 1,
+  },
+  dataCenter_2: {
+    description: 'The dataCenters are twice as efficient.',
+    name: 'Global CDN',
+    cost: 1 * units.giga,
+    icon: 'database',
+    reward: (state) => {
+      state.buildings.dataCenter.cps *= 2
+    },
+    unlock: (state) => state.buildings.dataCenter.count >= 5,
+  },
+  dataCenter_3: {
+    description: 'The dataCenters are twice as efficient.',
+    name: 'Blockchain Farm',
+    cost: 10 * units.giga,
+    icon: 'database',
+    reward: (state) => {
+      state.buildings.dataCenter.cps *= 2
+    },
+    unlock: (state) => state.buildings.dataCenter.count >= 25,
   },
 }
