@@ -12,11 +12,10 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex'
+import { mapState } from 'vuex'
 import BuildingList from '~/components/BuildingList'
 import ClickPanel from '~/components/ClickPanel'
 import CommercePanel from '~/components/CommercePanel'
-import costs from '~/mixins/costs'
 
 export default {
   components: {
@@ -24,14 +23,13 @@ export default {
     ClickPanel,
     CommercePanel,
   },
-  mixins: [costs],
   data: () => {
     return {
       manualCps: 0,
     }
   },
   computed: {
-    ...mapState(['buildings', 'clicks', 'factor']),
+    ...mapState(['buildings']),
   },
   mounted: function () {
     this.$nextTick(() => {
@@ -42,16 +40,6 @@ export default {
         }, 1000)
       })
     })
-  },
-  methods: {
-    ...mapMutations(['resetCommerceAmount']),
-    click: function () {
-      this.$store.commit('click', { amount: this.factor })
-      this.manualCps += this.factor
-      setTimeout(() => {
-        this.manualCps -= this.factor
-      }, 1000)
-    },
   },
 }
 </script>
