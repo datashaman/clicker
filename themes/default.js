@@ -81,6 +81,66 @@ export const upgrades = {
     },
     unlock: (state) => state.buildings.cursor.count >= 10,
   },
+  cursor_4: {
+    description:
+      'The mouse and cursors each gain +0.1 for each non-cursor object owned.',
+    name: 'Kilo Fingers',
+    cost: 100 * units.kilo,
+    icon: 'hand-pointer',
+    reward: (state) => {
+      let nonCursors = Object.keys(state.buildings).reduce((acc, key) => {
+        let building = state.buildings[key]
+        if (key !== 'cursor') {
+          acc += building.count
+        }
+        return acc
+      }, 0)
+
+      state.factor += nonCursors * 0.1
+      state.buildings.cursor.cps += nonCursors * 0.1
+    },
+    unlock: (state) => state.buildings.cursor.count >= 25,
+  },
+  cursor_5: {
+    description:
+      'The mouse and cursors each gain +0.5 for each non-cursor object owned.',
+    name: 'Mega Fingers',
+    cost: 10 * units.mega,
+    icon: 'hand-pointer',
+    reward: (state) => {
+      let nonCursors = Object.keys(state.buildings).reduce((acc, key) => {
+        let building = state.buildings[key]
+        if (key !== 'cursor') {
+          acc += building.count
+        }
+        return acc
+      }, 0)
+
+      state.factor += nonCursors * 0.5
+      state.buildings.cursor.cps += nonCursors * 0.5
+    },
+    unlock: (state) => state.buildings.cursor.count >= 50,
+  },
+  cursor_6: {
+    description:
+      'The mouse and cursors each gain +5 for each non-cursor object owned.',
+    name: 'Giga Fingers',
+    cost: 100 * units.mega,
+    icon: 'hand-pointer',
+    reward: (state) => {
+      let nonCursors = Object.keys(state.buildings).reduce((acc, key) => {
+        let building = state.buildings[key]
+        if (key !== 'cursor') {
+          acc += building.count
+        }
+        return acc
+      }, 0)
+
+      state.factor += nonCursors * 5
+      state.buildings.cursor.cps += nonCursors * 5
+    },
+    unlock: (state) => state.buildings.cursor.count >= 100,
+  },
   cpu_1: {
     description: 'The CPUs are twice as efficient.',
     name: 'Silicon Board',
