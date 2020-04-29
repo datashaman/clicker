@@ -24,6 +24,7 @@
       <button class="p-2 rounded-lg text-white bg-red-800" @click="reset">
         RESET
       </button>
+      <div class="text-sm">{{ resetCounter || 0 }}</div>
     </div>
   </div>
 </template>
@@ -39,7 +40,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['clicks', 'factor', 'buildings']),
+    ...mapState(['clicks', 'factor', 'buildings', 'resetCounter']),
     cps: function () {
       return (
         this.manualCps +

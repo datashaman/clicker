@@ -10,6 +10,7 @@ const initialState = () => {
     commerceOperation: 'buy',
     defaultCommerceAmount: 1,
     factor: 1,
+    resetCounter: 0,
     upgrades: [],
   }
 
@@ -64,9 +65,11 @@ export const mutations = {
   },
   reset(state) {
     const s = initialState()
+    const resetCounter = state.resetCounter || 0
     Object.keys(s).forEach((key) => {
       state[key] = s[key]
     })
+    state.resetCounter = resetCounter + 1
   },
   resetCommerceAmount(state) {
     state.commerceAmount = state.defaultCommerceAmount
