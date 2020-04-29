@@ -4,8 +4,8 @@ Generic clicker. Initial build borrows _heavily_ from *cookieclicker*; once I've
 
 Roadmap:
 
-* add upgrades
-* abstract config into a theme file
+* ~add upgrades~
+* ~abstract config into a theme file~
 * add fantasy theme
 
 ## Build Setup
