@@ -52,11 +52,23 @@ export default {
     },
   },
   methods: {
-    click: function () {
+    click: function (e) {
       this.$store.commit('click', { amount: this.factor })
       this.manualCps += this.factor
+
+      let el = document.createElement('DIV')
+      el.innerText = this.factor
+      el.style.color = '#ffffff'
+      el.style.backgroundColor = 'transparent'
+      el.style.fontWeight = 'bold'
+      el.style.position = 'absolute'
+      el.style.left = -(Math.random() * 30) + e.pageX + 15 + 'px'
+      el.style.top = -(Math.random() * 15) + e.pageY - 15 + 'px'
+      el = document.body.appendChild(el)
+
       setTimeout(() => {
         this.manualCps -= this.factor
+        document.body.removeChild(el)
       }, 1000)
     },
     reset: function () {
