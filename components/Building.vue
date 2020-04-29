@@ -81,7 +81,7 @@ export default {
     this.$nextTick(() => {
       setInterval(() => {
         this.$store.commit('click', {
-          amount: this.count * this.definition.cps,
+          amount: this.count * this.buildings[this.id].cps,
         })
       }, 1000)
     })

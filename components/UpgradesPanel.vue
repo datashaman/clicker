@@ -30,14 +30,14 @@ export default {
       let keys = Object.keys(upgrades)
 
       for (let i = 0; i < keys.length; i++) {
-        let id = keys[i]
-        let definition = upgrades[id]
+        let key = keys[i]
+        let definition = upgrades[key]
 
         if (
-          this.upgrades.indexOf(id) === -1 &&
+          this.upgrades.indexOf(key) === -1 &&
           definition.unlock(this.$store.state)
         ) {
-          result[id] = definition
+          result[key] = definition
         }
       }
 
