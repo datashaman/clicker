@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="text-center">
     <div class="flex">
       <div
-        class="flex-1 text-center cursor-pointer"
+        class="flex-1 cursor-pointer"
         accesskey="b"
         @click="setCommerceOperation({ operation: 'buy' })"
       >
@@ -11,7 +11,7 @@
         </span>
       </div>
       <div
-        class="flex-1 text-center cursor-pointer"
+        class="flex-1 cursor-pointer"
         accesskey="s"
         @click="setCommerceOperation({ operation: 'sell' })"
       >
@@ -25,7 +25,7 @@
       <li
         v-for="amount in commerceAmounts"
         :key="amount"
-        class="w-1/3 inline-block text-center cursor-pointer"
+        class="w-1/3 inline-block cursor-pointer"
         @click="setDefaultCommerceAmount({ amount })"
         @keyup="resetCommerceAmount()"
       >

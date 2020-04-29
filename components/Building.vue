@@ -72,6 +72,15 @@ export default {
       return this.buildings[this.id]
     },
   },
+  mounted: function () {
+    this.$nextTick(() => {
+      setInterval(() => {
+        this.$store.commit('click', {
+          amount: this.definition.count * this.definition.cps,
+        })
+      }, 1000)
+    })
+  },
   methods: {
     ...mapMutations(['commerce']),
   },
