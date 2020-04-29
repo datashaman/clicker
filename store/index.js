@@ -1,67 +1,45 @@
 import costs from '~/mixins/costs'
+import { buildings, upgrades } from '~/themes/default'
 
-const units = costs.data().units
+const initialState = () => {
+  let state = {
+    buildings: {},
+    clicks: 0,
+    commerceAmount: 1,
+    commerceAmounts: [1, 10, 100],
+    commerceOperation: 'buy',
+    defaultCommerceAmount: 1,
+    factor: 1,
+    upgrades: [],
+  }
 
-export const state = () => ({
-  buildings: {
-    cursor: {
-      count: 10,
-      cost: 15,
-      cps: 0.1,
-      icon: 'hand-pointer',
-    },
-    cpu: {
-      count: 5,
-      cost: 100,
-      cps: 1,
-      icon: 'microchip',
-    },
-    process: {
-      count: 0,
-      cost: 1.1 * units.kilo,
-      cps: 8,
-      icon: 'project-diagram',
-    },
-    service: {
-      count: 0,
-      cost: 12 * units.kilo,
-      cps: 47,
-      icon: 'cogs',
-    },
-    computer: {
-      count: 0,
-      cost: 130 * units.kilo,
-      cps: 260,
-      icon: 'desktop',
-    },
-    cluster: {
-      count: 0,
-      cost: 1.4 * units.mega,
-      cps: 1.4 * units.kilo,
-      icon: 'network-wired',
-    },
-    dataCenter: {
-      count: 0,
-      cost: 20 * units.mega,
-      cps: 7.8 * units.kilo,
-      icon: 'database',
-    },
-  },
-  clicks: 0,
-  commerceAmount: 1,
-  commerceAmounts: [1, 10, 100],
-  commerceOperation: 'buy',
-  defaultCommerceAmount: 1,
-  factor: 1,
-  upgrades: {},
-})
+  let keys = Object.keys(buildings)
+
+  for (let i = 0; i < keys.length; i++) {
+    let key = keys[i]
+    let building = buildings[key]
+    state.buildings[key] = {
+      count: building.count,
+      cps: building.cps,
+    }
+  }
+
+  return state
+}
+
+export const state = () => initialState()
 
 export const mutations = {
   commerce(state, { id }) {
+    let definition = buildings[id]
     let building = state.buildings[id]
 
     if (state.commerceOperation === 'buy') {
-      let cost = costs.methods.buildingCost(building, state.commerceAmount)
+      let cost = costs.methods.buildingCost(
+        definition,
+        building,
+        state.commerceAmount
+      )
       if (cost <= state.clicks) {
         state.clicks = Math.max(0, Math.round(state.clicks - cost))
         state.buildings[id].count += state.commerceAmount
@@ -70,7 +48,7 @@ export const mutations = {
       }
     } else if (state.commerceOperation === 'sell') {
       let amount = Math.min(state.commerceAmount, building.count)
-      let cost = costs.methods.buildingCost(building, -amount)
+      let cost = costs.methods.buildingCost(definition, building, -amount)
       if (cost) {
         state.clicks = Math.max(0, Math.round(state.clicks + cost / 2))
         state.buildings[id].count -= amount
@@ -83,6 +61,12 @@ export const mutations = {
   },
   click(state, { amount }) {
     state.clicks += amount
+  },
+  reset(state) {
+    const s = initialState()
+    Object.keys(s).forEach((key) => {
+      state[key] = s[key]
+    })
   },
   resetCommerceAmount(state) {
     state.commerceAmount = state.defaultCommerceAmount
@@ -97,17 +81,17 @@ export const mutations = {
     state.commerceOperation = operation
   },
   upgrade(state, { id }) {
-    let upgrade = state.upgrades[id]
+    let upgrade = upgrades[id]
+
+    if (state.upgrades.indexOf(id) !== -1) {
+      console.error('upgrade already bought')
+      return
+    }
 
     if (upgrade.cost <= state.clicks) {
-      if (upgrade.building) {
-        state.buildings[upgrade.building].cps +=
-          state.buildings[upgrade.building].cps * upgrade.factor
-      } else {
-        state.factor += state.factor * upgrade.factor
-      }
       state.clicks = Math.round(state.clicks - upgrade.cost)
-      upgrade.bought = true
+      state.upgrades.push(id)
+      upgrade.reward(state)
     } else {
       console.error('cannot afford this', {
         cost: upgrade.cost,

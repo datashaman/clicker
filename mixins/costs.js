@@ -14,17 +14,17 @@ export default {
     }
   },
   methods: {
-    buildingCost(building, amount) {
+    buildingCost(definition, building, amount) {
       if (amount >= 0) {
         return Math.round(
-          (building.cost *
+          (definition.cost *
             (1.15 ** (building.count + amount) - 1.15 ** building.count)) /
             0.15
         )
       }
 
       return Math.round(
-        (building.cost *
+        (definition.cost *
           (1.15 ** building.count - 1.15 ** (building.count + amount))) /
           0.15
       )

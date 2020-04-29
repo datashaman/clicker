@@ -33,7 +33,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['buildings', 'clicks', 'factor']),
+    ...mapState(['clicks', 'factor', 'buildings']),
     cps: function () {
       return (
         this.manualCps +

@@ -2,7 +2,7 @@
   <div :class="buildingClass" @click="commerce({ id })">
     <div class="leading-tight text-2xl">
       <div class="float-right">
-        {{ definition.count }}
+        {{ count }}
       </div>
       <div class="float-left w-10">
         <fa-icon :icon="definition.icon" />
@@ -10,12 +10,12 @@
       {{ id }}
     </div>
     <div class="text-sm">
-      <template v-if="commerceOperation === 'buy' || definition.count">
+      <template v-if="commerceOperation === 'buy' || count">
         {{ commerceOperation === 'buy' ? '+' : '-'
         }}{{
           commerceOperation === 'buy'
             ? commerceAmount
-            : Math.min(definition.count, commerceAmount)
+            : Math.min(count, commerceAmount)
         }}
         <fa-icon icon="bolt" /> {{ renderAmount(cost) }}
       </template>
@@ -26,6 +26,7 @@
 <script>
 import { mapMutations, mapState } from 'vuex'
 import costs from '~/mixins/costs'
+import { buildings } from '~/themes/default'
 
 export default {
   mixins: [costs],
@@ -36,18 +37,18 @@ export default {
     },
   },
   computed: {
-    ...mapState(['buildings', 'commerceAmount', 'commerceOperation']),
+    ...mapState(['buildings', 'clicks', 'commerceAmount', 'commerceOperation']),
     amount: function () {
       return 1
     },
     buildingClass: function () {
       if (this.commerceOperation === 'buy') {
-        return this.cost <= this.$store.state.clicks
+        return this.cost <= this.clicks
           ? 'font-bold cursor-pointer px-2 my-2'
           : 'text-gray-700 px-2 my-2'
       }
 
-      return this.definition.count > 0
+      return this.count > 0
         ? 'font-bold cursor-pointer px-2 text-red-700 my-2'
         : 'text-gray-700 px-2 my-2'
     },
@@ -57,10 +58,11 @@ export default {
       if (this.commerceOperation === 'buy') {
         amount = this.commerceAmount
       } else {
-        amount = -Math.min(this.definition.count, this.commerceAmount)
+        amount = -Math.min(this.count, this.commerceAmount)
       }
 
-      let result = this.buildingCost(this.definition, amount)
+      let building = this.buildings[this.id]
+      let result = this.buildingCost(this.definition, building, amount)
 
       if (this.commerceOperation === 'sell') {
         result /= 2
@@ -68,15 +70,18 @@ export default {
 
       return result
     },
+    count: function () {
+      return this.buildings[this.id].count
+    },
     definition: function () {
-      return this.buildings[this.id]
+      return buildings[this.id]
     },
   },
   mounted: function () {
     this.$nextTick(() => {
       setInterval(() => {
         this.$store.commit('click', {
-          amount: this.definition.count * this.definition.cps,
+          amount: this.count * this.definition.cps,
         })
       }, 1000)
     })
