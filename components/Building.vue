@@ -10,9 +10,15 @@
       {{ id }}
     </div>
     <div class="text-sm">
-      {{ commerceOperation === 'buy' ? '+' : '-'
-      }}{{ Math.min(definition.count, commerceAmount) }}
-      <fa-icon icon="bolt" /> {{ renderAmount(cost) }}
+      <template v-if="commerceOperation === 'buy' || definition.count">
+        {{ commerceOperation === 'buy' ? '+' : '-'
+        }}{{
+          commerceOperation === 'buy'
+            ? commerceAmount
+            : Math.min(definition.count, commerceAmount)
+        }}
+        <fa-icon icon="bolt" /> {{ renderAmount(cost) }}
+      </template>
     </div>
   </div>
 </template>
