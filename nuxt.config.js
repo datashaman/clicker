@@ -49,7 +49,6 @@ export default {
    ** Nuxt.js modules
    */
   modules: [
-    'nuxt-purgecss',
     [
       'nuxt-fontawesome',
       {
@@ -60,6 +59,12 @@ export default {
             icons: ['faBolt'],
           },
         ],
+      },
+    ],
+    [
+      'nuxt-purgecss',
+      {
+        whitelistPatterns: [/^fa-/, /-fa$/],
       },
     ],
   ],
