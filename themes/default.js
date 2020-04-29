@@ -49,7 +49,6 @@ export const buildings = {
 
 export const upgrades = {
   cursor_1: {
-    bought: false,
     description: 'The mouse and cursors are twice as efficient.',
     name: 'Finger splint',
     cost: 100,
@@ -61,7 +60,6 @@ export const upgrades = {
     unlock: (state) => state.buildings.cursor.count >= 1,
   },
   cursor_2: {
-    bought: false,
     description: 'The mouse and cursors are twice as efficient.',
     name: 'Stress Ball',
     cost: 500,
@@ -73,7 +71,6 @@ export const upgrades = {
     unlock: (state) => state.buildings.cursor.count >= 1,
   },
   cursor_3: {
-    bought: false,
     description: 'The mouse and cursors are twice as efficient.',
     name: 'Autoclick v0.1',
     cost: 10000,
@@ -85,7 +82,6 @@ export const upgrades = {
     unlock: (state) => state.buildings.cursor.count >= 10,
   },
   cpu_1: {
-    bought: false,
     description: 'The CPUs are twice as efficient.',
     name: 'Silicon Board',
     cost: 1000,
@@ -96,7 +92,6 @@ export const upgrades = {
     unlock: (state) => state.buildings.cpu.count >= 1,
   },
   cpu_2: {
-    bought: false,
     description: 'The CPUs are twice as efficient.',
     name: 'Heat Sink',
     cost: 5000,
@@ -107,7 +102,6 @@ export const upgrades = {
     unlock: (state) => state.buildings.cpu.count >= 5,
   },
   cpu_3: {
-    bought: false,
     description: 'The CPUs are twice as efficient.',
     name: 'Thermal Glue',
     cost: 50000,
@@ -118,7 +112,6 @@ export const upgrades = {
     unlock: (state) => state.buildings.cpu.count >= 25,
   },
   process_1: {
-    bought: false,
     description: 'The processes are twice as efficient.',
     name: 'RAM Upgrade',
     cost: 11000,
@@ -129,7 +122,6 @@ export const upgrades = {
     unlock: (state) => state.buildings.process.count >= 1,
   },
   process_2: {
-    bought: false,
     description: 'The processes are twice as efficient.',
     name: 'Renice Priority -20',
     cost: 55000,
@@ -140,7 +132,6 @@ export const upgrades = {
     unlock: (state) => state.buildings.process.count >= 5,
   },
   process_3: {
-    bought: false,
     description: 'The processes are twice as efficient.',
     name: '64-bit',
     cost: 550000,
@@ -151,7 +142,6 @@ export const upgrades = {
     unlock: (state) => state.buildings.process.count >= 25,
   },
   service_1: {
-    bought: false,
     description: 'The services are twice as efficient.',
     name: 'REST API',
     cost: 120000,
@@ -162,7 +152,6 @@ export const upgrades = {
     unlock: (state) => state.buildings.service.count >= 1,
   },
   service_2: {
-    bought: false,
     description: 'The services are twice as efficient.',
     name: 'Single Sign-On',
     cost: 600000,
@@ -173,7 +162,6 @@ export const upgrades = {
     unlock: (state) => state.buildings.service.count >= 5,
   },
   service_3: {
-    bought: false,
     description: 'The services are twice as efficient.',
     name: 'Microservice Architecture',
     cost: 6000000,
@@ -184,7 +172,6 @@ export const upgrades = {
     unlock: (state) => state.buildings.service.count >= 25,
   },
   computer_1: {
-    bought: false,
     description: 'The computers are twice as efficient.',
     name: 'External GPU',
     cost: 1300000,
@@ -195,7 +182,6 @@ export const upgrades = {
     unlock: (state) => state.buildings.computer.count >= 1,
   },
   computer_2: {
-    bought: false,
     description: 'The computers are twice as efficient.',
     name: 'Liquid Cooled',
     cost: 6500000,
@@ -206,14 +192,43 @@ export const upgrades = {
     unlock: (state) => state.buildings.computer.count >= 5,
   },
   computer_3: {
-    bought: false,
     description: 'The computers are twice as efficient.',
-    name: '',
+    name: 'Cray-1',
     cost: 65000000,
     icon: 'desktop',
     reward: (state) => {
       state.buildings.computer.cps *= 2
     },
     unlock: (state) => state.buildings.computer.count >= 25,
+  },
+  cluster_1: {
+    description: 'The clusters are twice as efficient.',
+    name: 'Distributed Directory',
+    cost: 14000000,
+    icon: 'network-wired',
+    reward: (state) => {
+      state.buildings.cluster.cps *= 2
+    },
+    unlock: (state) => state.buildings.cluster.count >= 1,
+  },
+  cluster_2: {
+    description: 'The clusters are twice as efficient.',
+    name: 'Decentralized Auth',
+    cost: 70000000,
+    icon: 'network-wired',
+    reward: (state) => {
+      state.buildings.cluster.cps *= 2
+    },
+    unlock: (state) => state.buildings.cluster.count >= 5,
+  },
+  cluster_3: {
+    description: 'The clusters are twice as efficient.',
+    name: 'Mining Rig',
+    cost: 700000000,
+    icon: 'network-wired',
+    reward: (state) => {
+      state.buildings.cluster.cps *= 2
+    },
+    unlock: (state) => state.buildings.cluster.count >= 25,
   },
 }
