@@ -171,6 +171,83 @@ export const upgrades = {
     },
     unlock: (state) => state.buildings.cpu.count >= 25,
   },
+  cpu_type_1: {
+    description: 'The CPUs are twice as efficient. Processes gain +1% per CPU.',
+    name: 'Floating Point Unit',
+    cost: 55 * units.kilo,
+    icon: 'microchip',
+    reward: (state) => {
+      state.buildings.cpu.cps *= 2
+      state.buildings.process.cps +=
+        (1 / 100) * state.buildings.process.cps * state.buildings.cpu.count
+    },
+    unlock: (state) =>
+      state.buildings.cpu.count >= 1 && state.buildings.process.count >= 15,
+  },
+  cpu_type_2: {
+    description:
+      'The CPUs are twice as efficient. Services gain +1% per 2 CPUs.',
+    name: 'EEPROM',
+    cost: 600 * units.kilo,
+    icon: 'microchip',
+    reward: (state) => {
+      state.buildings.cpu.cps *= 2
+      state.buildings.service.cps +=
+        (1 / 100) *
+        state.buildings.service.cps *
+        (state.buildings.cpu.count / 2)
+    },
+    unlock: (state) =>
+      state.buildings.cpu.count >= 1 && state.buildings.service.count >= 15,
+  },
+  cpu_type_3: {
+    description:
+      'The CPUs are twice as efficient. Computers gain +1% per 3 CPUs.',
+    name: 'Hyperthreading',
+    cost: 6.5 * units.mega,
+    icon: 'microchip',
+    reward: (state) => {
+      state.buildings.cpu.cps *= 2
+      state.buildings.computer.cps +=
+        (1 / 100) *
+        state.buildings.computer.cps *
+        (state.buildings.cpu.count / 3)
+    },
+    unlock: (state) =>
+      state.buildings.cpu.count >= 1 && state.buildings.computer.count >= 15,
+  },
+  cpu_type_4: {
+    description:
+      'The CPUs are twice as efficient. Clusters gain +1% per 4 CPUs.',
+    name: 'LDAP',
+    cost: 70 * units.mega,
+    icon: 'microchip',
+    reward: (state) => {
+      state.buildings.cpu.cps *= 2
+      state.buildings.cluster.cps +=
+        (1 / 100) *
+        state.buildings.cluster.cps *
+        (state.buildings.cpu.count / 4)
+    },
+    unlock: (state) =>
+      state.buildings.cpu.count >= 1 && state.buildings.cluster.count >= 15,
+  },
+  cpu_type_5: {
+    description:
+      'The CPUs are twice as efficient. DataCenters gain +1% per 5 CPUs.',
+    name: 'Cloud Computing',
+    cost: 1 * units.giga,
+    icon: 'microchip',
+    reward: (state) => {
+      state.buildings.cpu.cps *= 2
+      state.buildings.dataCenter.cps +=
+        (1 / 100) *
+        state.buildings.dataCenter.cps *
+        (state.buildings.cpu.count / 5)
+    },
+    unlock: (state) =>
+      state.buildings.cpu.count >= 1 && state.buildings.dataCenter.count >= 15,
+  },
   process_1: {
     description: 'The processes are twice as efficient.',
     name: 'RAM Upgrade',
@@ -320,82 +397,5 @@ export const upgrades = {
       state.buildings.dataCenter.cps *= 2
     },
     unlock: (state) => state.buildings.dataCenter.count >= 25,
-  },
-  cpu_type_1: {
-    description: 'The CPUs are twice as efficient. Processes gain +1% per CPU.',
-    name: 'Floating Point Unit',
-    cost: 55 * units.kilo,
-    icon: 'microchip',
-    reward: (state) => {
-      state.buildings.cpu.cps *= 2
-      state.buildings.process.cps +=
-        (1 / 100) * state.buildings.process.cps * state.buildings.cpu.count
-    },
-    unlock: (state) =>
-      state.buildings.cpu.count >= 1 && state.buildings.process.count >= 15,
-  },
-  cpu_type_2: {
-    description:
-      'The CPUs are twice as efficient. Services gain +1% per 2 CPUs.',
-    name: 'EEPROM',
-    cost: 600 * units.kilo,
-    icon: 'microchip',
-    reward: (state) => {
-      state.buildings.cpu.cps *= 2
-      state.buildings.service.cps +=
-        (1 / 100) *
-        state.buildings.service.cps *
-        (state.buildings.cpu.count / 2)
-    },
-    unlock: (state) =>
-      state.buildings.cpu.count >= 1 && state.buildings.service.count >= 15,
-  },
-  cpu_type_3: {
-    description:
-      'The CPUs are twice as efficient. Computers gain +1% per 3 CPUs.',
-    name: 'Hyperthreading',
-    cost: 6.5 * units.mega,
-    icon: 'microchip',
-    reward: (state) => {
-      state.buildings.cpu.cps *= 2
-      state.buildings.computer.cps +=
-        (1 / 100) *
-        state.buildings.computer.cps *
-        (state.buildings.cpu.count / 3)
-    },
-    unlock: (state) =>
-      state.buildings.cpu.count >= 1 && state.buildings.computer.count >= 15,
-  },
-  cpu_type_4: {
-    description:
-      'The CPUs are twice as efficient. Clusters gain +1% per 4 CPUs.',
-    name: 'LDAP',
-    cost: 70 * units.mega,
-    icon: 'microchip',
-    reward: (state) => {
-      state.buildings.cpu.cps *= 2
-      state.buildings.cluster.cps +=
-        (1 / 100) *
-        state.buildings.cluster.cps *
-        (state.buildings.cpu.count / 4)
-    },
-    unlock: (state) =>
-      state.buildings.cpu.count >= 1 && state.buildings.cluster.count >= 15,
-  },
-  cpu_type_5: {
-    description:
-      'The CPUs are twice as efficient. DataCenters gain +1% per 5 CPUs.',
-    name: 'Cloud Computing',
-    cost: 1 * units.giga,
-    icon: 'microchip',
-    reward: (state) => {
-      state.buildings.cpu.cps *= 2
-      state.buildings.dataCenter.cps +=
-        (1 / 100) *
-        state.buildings.dataCenter.cps *
-        (state.buildings.cpu.count / 5)
-    },
-    unlock: (state) =>
-      state.buildings.cpu.count >= 1 && state.buildings.dataCenter.count >= 15,
   },
 }
