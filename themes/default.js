@@ -231,4 +231,14 @@ export const upgrades = {
     },
     unlock: (state) => state.buildings.cluster.count >= 25,
   },
+  dataCenter_1: {
+    description: 'The dataCenter are 3 times as efficient.',
+    name: 'Multi Region',
+    cost: 2000000000,
+    icon: 'database',
+    reward: (state) => {
+      state.buildings.dataCenter.cps *= 3
+    },
+    unlock: (state) => state.buildings.dataCenter.count >= 30,
+  },
 }
