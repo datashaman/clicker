@@ -10,6 +10,10 @@
       {{ id }}
     </div>
     <div class="text-sm">
+      <div v-if="count" class="float-right font-light">
+        <fa-icon icon="bolt" />
+        {{ renderAmount(count * cps) }}/s
+      </div>
       <template v-if="commerceOperation === 'buy' || count">
         {{ commerceOperation === 'buy' ? '+' : '-'
         }}{{
@@ -70,6 +74,9 @@ export default {
 
       return result
     },
+    cps: function () {
+      return this.buildings[this.id].cps
+    },
     count: function () {
       return this.buildings[this.id].count
     },
@@ -81,7 +88,7 @@ export default {
     this.$nextTick(() => {
       setInterval(() => {
         this.$store.commit('click', {
-          amount: this.count * this.buildings[this.id].cps,
+          amount: this.count * this.cps,
         })
       }, 1000)
     })
