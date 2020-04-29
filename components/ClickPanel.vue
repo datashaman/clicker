@@ -69,7 +69,7 @@ export default {
       el = document.body.appendChild(el)
 
       setTimeout(() => {
-        this.manualCps -= this.factor
+        this.manualCps -= state.factor
         document.body.removeChild(el)
       }, 1000)
     },
