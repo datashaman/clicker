@@ -1,8 +1,11 @@
 <template>
   <div :class="buildingClass" @click="commerce({ id })">
-    <div class="text-2xl">
+    <div class="leading-tight text-2xl">
       <div class="float-right">
         {{ definition.count }}
+      </div>
+      <div class="float-left w-10">
+        <fa-icon :icon="definition.icon" />
       </div>
       {{ id }}
     </div>
@@ -33,8 +36,8 @@ export default {
     buildingClass: function () {
       if (this.commerceOperation === 'buy') {
         return this.cost <= this.$store.state.clicks
-          ? 'font-bold cursor-pointer px-2'
-          : 'text-gray-700 px-2'
+          ? 'font-bold cursor-pointer px-2 m-2'
+          : 'text-gray-700 px-2 m-2'
       }
 
       return this.definition.count > 0

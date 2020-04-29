@@ -56,7 +56,16 @@ export default {
         imports: [
           {
             set: '@fortawesome/free-solid-svg-icons',
-            icons: ['faBolt'],
+            icons: [
+              'faBolt',
+              'faCogs',
+              'faDatabase',
+              'faDesktop',
+              'faHandPointer',
+              'faMicrochip',
+              'faNetworkWired',
+              'faProjectDiagram',
+            ],
           },
         ],
       },
