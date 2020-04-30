@@ -6,7 +6,21 @@ Roadmap:
 
 * ~add upgrades~
 * ~abstract config into a theme file~
-* add fantasy theme
+* add achievements
+* add permanent upgrades
+* add production counter (current run and all time) overall
+* add production counter per building type (current run only)
+* add current run time - uptime in default theme?
+* add theme switcher
+* add various themes, some ideas below:
+  * alchemy
+  * fantasy rpg
+  * healthcare (covid-19?)
+  * magic
+  * sci-fi
+* add endgame scenarios, some ideas below:
+  * the singularity
+  * heat death of the universe
 
 ## Build Setup
 
