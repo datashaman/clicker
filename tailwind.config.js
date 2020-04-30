@@ -16,5 +16,6 @@ module.exports = {
   },
   variants: {
     fontSize: ['hover'],
+    transitionTimingFunction: ['responsive', 'hover'],
   },
 }

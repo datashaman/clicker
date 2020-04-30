@@ -63,13 +63,6 @@ export const actions = {
 
     let el = document.getElementById('clicker').cloneNode(true)
 
-    el.classList.add('transition')
-    el.classList.add('duration-3000')
-    el.classList.add('ease-in-out')
-    el.classList.add('transform')
-    el.classList.add('hover:-translate-y-1')
-    el.classList.add('hover:scale-110')
-
     const rotate = parseInt(Math.random() * 3) * 45 - 45
     el.classList.add(rotate < 0 ? '-' : '' + 'rotate-' + Math.abs(rotate))
 
@@ -80,7 +73,10 @@ export const actions = {
     el.style.top = 40 + Math.random() * (vy - 80) + 'px'
 
     el = document.body.appendChild(el)
-    el.style.opacity = 1
+
+    el.classList.add('transition')
+    el.classList.add('duration-1000')
+    el.classList.add('ease-in-out')
 
     let listener
 
@@ -102,17 +98,24 @@ export const actions = {
       note = document.body.appendChild(note)
 
       setTimeout(() => {
-        document.body.removeChild(el)
+        if (document.body.contains(el)) {
+          el.style.opacity = 0
+
+          setTimeout(() => {
+            document.body.removeChild(el)
+          }, 3000)
+        }
 
         note.style.opacity = 0
-
         setTimeout(() => {
           document.body.removeChild(note)
-        }, 400)
+        }, 800)
       }, 250)
 
       window.removeEventListener('click', listener)
     })
+
+    el.style.opacity = 1
 
     setTimeout(() => {
       if (document.body.contains(el)) {
@@ -124,7 +127,7 @@ export const actions = {
       }
 
       window.removeEventListener('click', listener)
-    }, 3000 + Math.random() * 7000)
+    }, 5000 + Math.random() * 7000)
   },
 }
 
