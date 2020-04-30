@@ -7,6 +7,7 @@ Roadmap:
 * ~add upgrades~
 * ~abstract config into a theme file~
 * ~add bought upgrades panel~
+* ~add random distraction / rewards~ kinda, needs more
 * add achievements
 * add permanent upgrades
 * add production counter (current run and all time) overall
@@ -22,7 +23,6 @@ Roadmap:
 * add endgame scenarios, some ideas below:
   * the singularity
   * heat death of the universe
-* add random distraction / rewards
 * easter eggs (as many as possible)
 
 ## Build Setup

@@ -2,6 +2,8 @@ import costs from '~/mixins/costs'
 import { buildings, upgrades } from '~/themes/default'
 
 const initialState = () => {
+  let started = new Date()
+
   let state = {
     buildings: {},
     clicks: 0,
@@ -10,7 +12,12 @@ const initialState = () => {
     commerceOperation: 'buy',
     defaultCommerceAmount: 1,
     factor: 1,
-    resetCounter: 0,
+    legacy: {
+      resetCounter: 0,
+      started: started,
+      clicks: 0,
+    },
+    started: started,
     upgrades: [],
   }
 
@@ -163,14 +170,20 @@ export const mutations = {
   },
   click(state, { amount }) {
     state.clicks += amount
+    if (state.legacy) {
+      state.legacy.clicks += amount
+    }
   },
   reset(state) {
     const s = initialState()
-    const resetCounter = state.resetCounter || 0
+    const legacy = state.legacy || {}
+    const resetCounter = state.resetCounter || legacy.resetCounter || 0
     Object.keys(s).forEach((key) => {
       state[key] = s[key]
     })
-    state.resetCounter = resetCounter + 1
+    state.legacy = legacy
+    state.legacy.resetCounter = resetCounter + 1
+    delete state.resetCounter
   },
   resetCommerceAmount(state) {
     state.commerceAmount = state.defaultCommerceAmount

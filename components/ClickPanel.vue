@@ -1,31 +1,49 @@
 <template>
-  <div class="text-center">
-    <div class="bg-red-400 m-4 rounded-lg shadow">
-      <div class="h-28">
+  <div>
+    <div class="bg-red-400 m-4 rounded-lg shadow text-center">
+      <div class="h-32">
         <fa-icon
           id="clicker"
           icon="bolt"
-          class="h-20 cursor-pointer text-4xl hover:text-5xl"
+          class="h-32 cursor-pointer text-4xl hover:text-6xl"
           @click="click"
         />
       </div>
     </div>
 
-    <div class="text-lg font-bold">
+    <div class="text-lg font-bold text-center">
       <fa-icon icon="bolt" />
       {{ renderAmount(Math.round(clicks)) }}
     </div>
 
-    <div class="text-xs font-light">
+    <div class="text-xs font-light text-center">
       <fa-icon icon="bolt" />
       {{ renderAmount(cps) }}/s
     </div>
 
-    <div class="mt-12">
+    <div class="mx-2 my-4">
+      <div class="text-sm">
+        <div class="font-bold">Resets</div>
+        {{ legacy.resetCounter || resetCounter || 0 }}
+      </div>
+      <div v-if="legacy.clicks" class="text-sm">
+        <div class="font-bold">All Time</div>
+        <fa-icon icon="bolt" /> {{ renderAmount(legacy.clicks) }}
+      </div>
+      <div v-if="legacy.started" class="text-sm">
+        <div class="font-bold">Started</div>
+        {{ new Date(legacy.started).toLocaleString() }}
+      </div>
+      <div v-if="started" class="text-sm">
+        <div class="font-bold">Started Run</div>
+        {{ new Date(started).toLocaleString() }}
+      </div>
+    </div>
+
+    <div class="mb-4 mt-6 text-center">
       <button class="p-2 rounded-lg text-white bg-red-800" @click="reset">
         RESET
       </button>
-      <div class="text-sm">{{ resetCounter || 0 }}</div>
     </div>
   </div>
 </template>
@@ -42,7 +60,14 @@ export default {
     }
   },
   computed: {
-    ...mapState(['clicks', 'factor', 'buildings', 'resetCounter']),
+    ...mapState([
+      'clicks',
+      'factor',
+      'buildings',
+      'legacy',
+      'resetCounter',
+      'started',
+    ]),
     cps: function () {
       return this.manualCps + this.$store.getters.effectiveCps
     },
