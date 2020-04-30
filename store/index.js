@@ -13,9 +13,12 @@ const initialState = () => {
     defaultCommerceAmount: 1,
     factor: 1,
     legacy: {
-      resetCounter: 0,
-      started: started,
       clicks: 0,
+      cells: 0,
+      resetCounter: 0,
+      spentCells: 0,
+      started: started,
+      upgrades: [],
     },
     started: started,
     upgrades: [],
@@ -37,7 +40,14 @@ const initialState = () => {
 
 export const state = () => initialState()
 
+const units = costs.data().units
+
 export const getters = {
+  cells: function (state) {
+    const clicks = state.legacy.clicks || 0
+
+    return Number(Math.cbrt(clicks / (1 * units.tera)).toFixed(3))
+  },
   effectiveCps: function (state) {
     state = JSON.parse(JSON.stringify(state))
 
@@ -177,6 +187,7 @@ export const mutations = {
   reset(state) {
     const s = initialState()
     const legacy = state.legacy || {}
+    legacy.cells = parseInt(state.cells)
     const resetCounter = state.resetCounter || legacy.resetCounter || 0
     Object.keys(s).forEach((key) => {
       state[key] = s[key]

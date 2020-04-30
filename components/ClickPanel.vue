@@ -26,6 +26,11 @@
         <div class="font-bold">Resets</div>
         {{ legacy.resetCounter || resetCounter || 0 }}
       </div>
+      <div class="text-sm">
+        <div class="font-bold">Cells</div>
+        run {{ renderAmount(cells - legacy.cells) }}<br />
+        legacy {{ renderAmount(legacy.cells) }}
+      </div>
       <div v-if="legacy.clicks" class="text-sm">
         <div class="font-bold">All Time</div>
         <fa-icon icon="bolt" /> {{ renderAmount(legacy.clicks) }}
@@ -48,7 +53,7 @@
   </div>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 import costs from '~/mixins/costs'
 import { upgrades } from '~/themes/default'
 
@@ -60,6 +65,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['cells']),
     ...mapState([
       'clicks',
       'factor',
