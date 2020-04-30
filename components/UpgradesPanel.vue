@@ -1,28 +1,30 @@
 <template>
   <div class="pl-4">
     <div class="flex mb-2">
-      <div class="flex-1 cursor-pointer" @click="toggle">
+      <div class="flex-1 cursor-pointer" @click="setCurrent('available')">
         <span :class="{ 'font-bold': current === 'available' }">available</span>
       </div>
-      <div class="flex-1 cursor-pointer" @click="toggle">
+      <div class="flex-1 cursor-pointer" @click="setCurrent('bought')">
         <span :class="{ 'font-bold': current === 'bought' }">
           bought ({{ Object.keys(bought).length }}/{{ total }})
         </span>
       </div>
     </div>
 
-    <div
-      v-for="(definition, id) in this[current]"
-      :key="id"
-      :class="upgradeClass(definition)"
-      @click="upgrade({ id })"
-    >
-      <div>
-        <fa-icon :icon="definition.icon" />
-        <span class="font-bold">{{ definition.name }}</span>
+    <div class="overflow-auto h-full">
+      <div
+        v-for="(definition, id) in this[current]"
+        :key="id"
+        :class="upgradeClass(definition)"
+        @click="upgrade({ id })"
+      >
+        <div>
+          <fa-icon :icon="definition.icon" />
+          <span class="font-bold">{{ definition.name }}</span>
+        </div>
+        {{ definition.description }}
+        <fa-icon icon="bolt" /> {{ renderAmount(definition.cost) }}
       </div>
-      {{ definition.description }}
-      <fa-icon icon="bolt" /> {{ renderAmount(definition.cost) }}
     </div>
   </div>
 </template>
@@ -78,8 +80,8 @@ export default {
   },
   methods: {
     ...mapMutations(['upgrade']),
-    toggle: function () {
-      this.current = this.current === 'available' ? 'bought' : 'available'
+    setCurrent: function (current) {
+      this.current = current
     },
     upgradeClass: function (upgrade) {
       let classes = 'leading-tight mb-2'
