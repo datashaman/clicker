@@ -95,8 +95,7 @@ export default {
 
       let el = document.createElement('DIV')
       el.innerText = this.renderAmount(state.factor)
-      el.style.color = '#ffffff'
-      el.style.backgroundColor = 'transparent'
+      el.classList.add('text-gray-200')
       el.style.fontWeight = 'bold'
       el.style.position = 'absolute'
       el.style.left = -(Math.random() * 30) + e.pageX + 15 + 'px'
