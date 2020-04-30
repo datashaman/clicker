@@ -1,7 +1,18 @@
 <template>
   <div class="pl-4">
+    <div class="flex mb-2">
+      <div class="flex-1 cursor-pointer" @click="toggle">
+        <span :class="{ 'font-bold': current === 'available' }">available</span>
+      </div>
+      <div class="flex-1 cursor-pointer" @click="toggle">
+        <span :class="{ 'font-bold': current === 'bought' }">
+          bought ({{ Object.keys(bought).length }}/{{ total }})
+        </span>
+      </div>
+    </div>
+
     <div
-      v-for="(definition, id) in availableUpgrades"
+      v-for="(definition, id) in this[current]"
       :key="id"
       :class="upgradeClass(definition)"
       @click="upgrade({ id })"
@@ -23,9 +34,12 @@ import { upgrades } from '~/themes/default'
 
 export default {
   mixins: [costs],
+  data: () => ({
+    current: 'available',
+  }),
   computed: {
     ...mapState(['clicks', 'upgrades']),
-    availableUpgrades: function () {
+    available: function () {
       let result = {}
       let keys = Object.keys(upgrades)
 
@@ -43,13 +57,34 @@ export default {
 
       return result
     },
+    bought: function () {
+      let result = {}
+      let keys = Object.keys(upgrades)
+
+      for (let i = 0; i < keys.length; i++) {
+        let key = keys[i]
+        let definition = upgrades[key]
+
+        if (this.upgrades.indexOf(key) !== -1) {
+          result[key] = definition
+        }
+      }
+
+      return result
+    },
+    total: function () {
+      return Object.keys(upgrades).length
+    },
   },
   methods: {
     ...mapMutations(['upgrade']),
+    toggle: function () {
+      this.current = this.current === 'available' ? 'bought' : 'available'
+    },
     upgradeClass: function (upgrade) {
       let classes = 'leading-tight mb-2'
 
-      if (this.clicks >= upgrade.cost) {
+      if (this.current === 'available' && this.clicks >= upgrade.cost) {
         classes += ' cursor-pointer'
       } else {
         classes += ' font-light text-gray-600'
