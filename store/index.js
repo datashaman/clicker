@@ -50,18 +50,28 @@ export const getters = {
 export const actions = {
   random(context) {
     let el = document.getElementById('clicker').cloneNode(true)
-    let x = Math.random() * (screen.availWidth - 200)
-    let y = Math.random() * (screen.availHeight - 200)
+
+    const vx = Math.max(
+      document.documentElement.clientWidth,
+      window.innerWidth || 0
+    )
+
+    const vy = Math.max(
+      document.documentElement.clientHeight,
+      window.innerHeight || 0
+    )
 
     el.classList.add('random')
     el.style.position = 'absolute'
     el.style.fontSize = '0.5em'
-    el.style.left = -(Math.random() * 30) + x + 15 + 'px'
-    el.style.top = -(Math.random() * 25) + y - 25 + 'px'
+    el.style.left = 40 + Math.random() * (vx - 80) + 'px'
+    el.style.top = 40 + Math.random() * (vy - 80) + 'px'
 
     el = document.body.appendChild(el)
 
-    el.addEventListener('click', (e) => {
+    let listener
+
+    listener = el.addEventListener('click', (e) => {
       let amount = parseInt(
         ((2.5 + Math.random() * 5) / 100) * context.state.clicks
       )
@@ -79,12 +89,16 @@ export const actions = {
       setTimeout(() => {
         document.body.removeChild(note)
       }, 1000)
+
+      window.removeEventListener('click', listener)
     })
 
     setTimeout(() => {
       if (document.body.contains(el)) {
         document.body.removeChild(el)
       }
+
+      window.removeEventListener('click', listener)
     }, 3000 + Math.random() * 7000)
   },
 }
