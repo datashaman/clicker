@@ -23,17 +23,19 @@
 
     <div class="mx-2 my-4 text-right">
       <div class="text-sm">
-        <div class="font-bold">Resets</div>
-        {{ legacy.resetCounter || resetCounter || 0 }}
-      </div>
-      <div class="text-sm">
         <div class="font-bold">Cells</div>
-        run {{ renderAmount(cells - legacy.cells) }}<br />
-        legacy {{ renderAmount(legacy.cells) }}
+        run <fa-icon icon="car-battery" />
+        {{ renderAmount(cells - legacy.cells) }}<br />
+        stored <fa-icon icon="car-battery" />
+        {{ renderAmount(legacy.cells - legacy.spentCells) }}
       </div>
       <div v-if="legacy.clicks" class="text-sm">
         <div class="font-bold">All Time</div>
-        <fa-icon icon="bolt" /> {{ renderAmount(legacy.clicks) }}
+        {{ legacy.resetCounter || resetCounter || 0 }} resets<br />
+        <fa-icon icon="bolt" />
+        {{ renderAmount(legacy.clicks) }}<br />
+        <fa-icon icon="car-battery" />
+        {{ renderAmount(cells) }}
       </div>
       <div v-if="legacy.started" class="text-sm">
         <div class="font-bold">Started</div>

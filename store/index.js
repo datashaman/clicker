@@ -46,7 +46,7 @@ export const getters = {
   cells: function (state) {
     const clicks = state.legacy.clicks || 0
 
-    return Number(Math.cbrt(clicks / (1 * units.tera)).toFixed(3))
+    return parseInt(Math.cbrt(clicks / (1 * units.tera)))
   },
   effectiveCps: function (state) {
     state = JSON.parse(JSON.stringify(state))
