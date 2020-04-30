@@ -21,6 +21,8 @@ Roadmap:
 * add endgame scenarios, some ideas below:
   * the singularity
   * heat death of the universe
+* add random distraction / rewards
+* easter eggs (as many as possible)
 
 ## Build Setup
 
