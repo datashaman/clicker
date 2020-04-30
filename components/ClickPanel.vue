@@ -3,6 +3,7 @@
     <div class="bg-red-400 m-4 rounded-lg shadow">
       <div class="h-28">
         <fa-icon
+          id="clicker"
           icon="bolt"
           class="h-20 cursor-pointer text-4xl hover:text-5xl"
           @click="click"

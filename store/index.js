@@ -47,6 +47,34 @@ export const getters = {
   },
 }
 
+export const actions = {
+  random(context) {
+    let el = document.getElementById('clicker').cloneNode(true)
+    let x = Math.random() * (screen.availWidth - 200)
+    let y = Math.random() * (screen.availHeight - 200)
+
+    el.classList.add('random')
+    el.style.position = 'absolute'
+    el.style.fontSize = '0.5em'
+    el.style.left = -(Math.random() * 30) + x + 15 + 'px'
+    el.style.top = -(Math.random() * 25) + y - 25 + 'px'
+
+    el = document.body.appendChild(el)
+
+    el.addEventListener('click', () => {
+      let amount = ((2 + Math.random() * 8) / 100) * context.state.clicks
+      context.commit('click', { amount })
+      document.body.removeChild(el)
+    })
+
+    setTimeout(() => {
+      if (document.body.contains(el)) {
+        document.body.removeChild(el)
+      }
+    }, 3000 + Math.random() * 7000)
+  },
+}
+
 export const mutations = {
   commerce(state, { id }) {
     let definition = buildings[id]
