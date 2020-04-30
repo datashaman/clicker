@@ -2,7 +2,9 @@
   <div class="pl-4">
     <div class="flex mb-2">
       <div class="flex-1 cursor-pointer" @click="setCurrent('available')">
-        <span :class="{ 'font-bold': current === 'available' }">available</span>
+        <span :class="{ 'font-bold': current === 'available' }">
+          available ({{ Object.keys(available).length }})
+        </span>
       </div>
       <div
         class="flex-1 cursor-pointer text-right"
