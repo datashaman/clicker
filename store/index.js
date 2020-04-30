@@ -49,8 +49,6 @@ export const getters = {
 
 export const actions = {
   random(context) {
-    let el = document.getElementById('clicker').cloneNode(true)
-
     const vx = Math.max(
       document.documentElement.clientWidth,
       window.innerWidth || 0
@@ -61,13 +59,28 @@ export const actions = {
       window.innerHeight || 0
     )
 
-    el.classList.add('random')
+    const fontSize = Number(((Math.random() * 4 + 1) / 2).toFixed(1))
+
+    let el = document.getElementById('clicker').cloneNode(true)
+
+    el.classList.add('transition')
+    el.classList.add('duration-3000')
+    el.classList.add('ease-in-out')
+    el.classList.add('transform')
+    el.classList.add('hover:-translate-y-1')
+    el.classList.add('hover:scale-110')
+
+    const rotate = parseInt(Math.random() * 3) * 45 - 45
+    el.classList.add(rotate < 0 ? '-' : '' + 'rotate-' + Math.abs(rotate))
+
+    el.style.opacity = 0
     el.style.position = 'absolute'
-    el.style.fontSize = '0.5em'
+    el.style.fontSize = fontSize + 'em'
     el.style.left = 40 + Math.random() * (vx - 80) + 'px'
     el.style.top = 40 + Math.random() * (vy - 80) + 'px'
 
     el = document.body.appendChild(el)
+    el.style.opacity = 1
 
     let listener
 
@@ -76,26 +89,38 @@ export const actions = {
         ((2.5 + Math.random() * 5) / 100) * context.state.clicks
       )
       context.commit('click', { amount })
-      document.body.removeChild(el)
 
       let note = document.createElement('DIV')
       note.innerText = costs.methods.renderAmount(amount)
       note.style.fontWeight = 'bold'
       note.style.position = 'absolute'
-      note.style.left = -(Math.random() * 30) + e.pageX + 15 + 'px'
-      note.style.top = -(Math.random() * 25) + e.pageY - 25 + 'px'
+      note.style.left = -(Math.random() * 45) + e.pageX + 22.5 + 'px'
+      note.style.top = -(Math.random() * 45) + e.pageY - 25 + 'px'
+      note.classList.add('transition')
+      note.classList.add('duration-700')
+      note.classList.add('ease-out')
       note = document.body.appendChild(note)
 
       setTimeout(() => {
-        document.body.removeChild(note)
-      }, 1000)
+        document.body.removeChild(el)
+
+        note.style.opacity = 0
+
+        setTimeout(() => {
+          document.body.removeChild(note)
+        }, 400)
+      }, 250)
 
       window.removeEventListener('click', listener)
     })
 
     setTimeout(() => {
       if (document.body.contains(el)) {
-        document.body.removeChild(el)
+        el.style.opacity = 0
+
+        setTimeout(() => {
+          document.body.removeChild(el)
+        }, 3000)
       }
 
       window.removeEventListener('click', listener)
