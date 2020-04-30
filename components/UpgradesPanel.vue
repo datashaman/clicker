@@ -1,6 +1,6 @@
 <template>
   <div class="pl-4">
-    <div class="flex bg-gray-300 p-2 rounded-sm">
+    <div class="flex bg-gray-300 p-4 rounded-sm">
       <div class="flex-1 cursor-pointer" @click="setCurrent('available')">
         <span :class="{ 'font-bold': current === 'available' }">
           available ({{ Object.keys(available).length }})
@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <div class="bg-gray-100 p-2 overflow-auto" style="height: 30rem;">
+    <div class="bg-gray-100 p-4 overflow-auto" style="height: 30rem;">
       <div
         v-for="(definition, id) in this[current]"
         :key="id"
@@ -89,7 +89,7 @@ export default {
       this.current = current
     },
     upgradeClass: function (upgrade) {
-      let classes = 'leading-tight mb-2'
+      let classes = 'leading-tight mb-4'
 
       if (this.current === 'available' && this.clicks >= upgrade.cost) {
         classes += ' cursor-pointer'

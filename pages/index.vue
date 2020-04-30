@@ -4,7 +4,7 @@
       <ClickPanel />
     </div>
 
-    <div class="flex-none mt-4 w-64">
+    <div class="flex-none mt-4 w-72">
       <CommercePanel />
       <BuildingList />
     </div>

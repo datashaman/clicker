@@ -21,15 +21,15 @@
       {{ renderAmount(cps) }}/s
     </div>
 
-    <div class="mx-2 my-4 text-right">
-      <div class="text-sm">
+    <div class="m-4 text-right text-xs">
+      <div>
         <div class="font-bold">Cells</div>
         run <fa-icon class="text-green-500" icon="car-battery" />
         {{ renderAmount(cells - legacy.cells) }}<br />
         stored <fa-icon class="text-green-500" icon="car-battery" />
         {{ renderAmount(legacy.cells - legacy.spentCells) }}
       </div>
-      <div v-if="legacy.clicks" class="text-sm">
+      <div v-if="legacy.clicks">
         <div class="font-bold">All Time</div>
         {{ legacy.resetCounter || resetCounter || 0 }} resets<br />
         <fa-icon icon="bolt" />
@@ -37,11 +37,11 @@
         <fa-icon class="text-green-500" icon="car-battery" />
         {{ renderAmount(cells) }}
       </div>
-      <div v-if="legacy.started" class="text-sm">
+      <div v-if="legacy.started">
         <div class="font-bold">Started</div>
         {{ new Date(legacy.started).toLocaleString() }}
       </div>
-      <div v-if="started" class="text-sm">
+      <div v-if="started">
         <div class="font-bold">Started Run</div>
         {{ new Date(started).toLocaleString() }}
       </div>

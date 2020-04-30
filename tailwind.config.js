@@ -9,6 +9,9 @@ module.exports = {
       padding: '2rem',
     },
     extend: {
+      spacing: {
+        '72': '18rem',
+      },
       transitionDuration: {
         '3000': '3000ms',
       },
