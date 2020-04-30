@@ -1,11 +1,12 @@
 <template>
   <div>
-    <div class="bg-red-400 m-4 rounded-lg shadow text-center">
+    <div class="bg-red-400 m-4 rounded-full shadow text-center">
       <div class="h-32">
         <fa-icon
           id="clicker"
           icon="bolt"
           class="h-32 cursor-pointer text-4xl hover:text-6xl"
+          style="position: relative; left: 0.16rem;"
           @click="click"
         />
       </div>
