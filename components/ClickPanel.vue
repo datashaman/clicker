@@ -56,11 +56,13 @@ export default {
         upgrade.reward(state)
       })
 
-      this.$store.commit('click', { amount: state.factor })
-      this.manualCps += state.factor
+      let factor = Math.round(state.factor)
+
+      this.$store.commit('click', { amount: factor })
+      this.manualCps += factor
 
       let el = document.createElement('DIV')
-      el.innerText = state.factor
+      el.innerText = this.renderAmount(state.factor)
       el.style.color = '#ffffff'
       el.style.backgroundColor = 'transparent'
       el.style.fontWeight = 'bold'
