@@ -1,6 +1,6 @@
 <template>
-  <div class="pl-4 flex flex-col">
-    <div class="flex flex-1 mb-2">
+  <div class="pl-4">
+    <div class="flex mb-2">
       <div class="flex-1 cursor-pointer" @click="setCurrent('available')">
         <span :class="{ 'font-bold': current === 'available' }">available</span>
       </div>
@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <div class="overflow-auto flex-grow">
+    <div class="overflow-auto" style="height: 450px;">
       <div
         v-for="(definition, id) in this[current]"
         :key="id"
