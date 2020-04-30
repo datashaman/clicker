@@ -24,9 +24,9 @@
     <div class="mx-2 my-4 text-right">
       <div class="text-sm">
         <div class="font-bold">Cells</div>
-        run <fa-icon icon="car-battery" />
+        run <fa-icon class="text-green-500" icon="car-battery" />
         {{ renderAmount(cells - legacy.cells) }}<br />
-        stored <fa-icon icon="car-battery" />
+        stored <fa-icon class="text-green-500" icon="car-battery" />
         {{ renderAmount(legacy.cells - legacy.spentCells) }}
       </div>
       <div v-if="legacy.clicks" class="text-sm">
@@ -34,7 +34,7 @@
         {{ legacy.resetCounter || resetCounter || 0 }} resets<br />
         <fa-icon icon="bolt" />
         {{ renderAmount(legacy.clicks) }}<br />
-        <fa-icon icon="car-battery" />
+        <fa-icon class="text-green-500" icon="car-battery" />
         {{ renderAmount(cells) }}
       </div>
       <div v-if="legacy.started" class="text-sm">
@@ -47,10 +47,8 @@
       </div>
     </div>
 
-    <div class="mb-4 mt-6 text-center">
-      <button class="p-2 rounded-lg text-white bg-red-800" @click="reset">
-        RESET
-      </button>
+    <div class="text-center text-4xl">
+      <fa-icon class="cursor-pointer" icon="power-off" @click="reset" />
     </div>
   </div>
 </template>

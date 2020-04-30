@@ -65,6 +65,7 @@ export default {
               'faHandPointer',
               'faMicrochip',
               'faNetworkWired',
+              'faPowerOff',
               'faProjectDiagram',
             ],
           },
