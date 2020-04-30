@@ -4,7 +4,10 @@
       <div class="flex-1 cursor-pointer" @click="setCurrent('available')">
         <span :class="{ 'font-bold': current === 'available' }">available</span>
       </div>
-      <div class="flex-1 cursor-pointer" @click="setCurrent('bought')">
+      <div
+        class="flex-1 cursor-pointer text-right"
+        @click="setCurrent('bought')"
+      >
         <span :class="{ 'font-bold': current === 'bought' }">
           bought ({{ Object.keys(bought).length }}/{{ total }})
         </span>
