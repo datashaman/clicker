@@ -1,5 +1,5 @@
 <template>
-  <ul>
+  <ul class="p-2 bg-gray-100">
     <li v-for="(defn, id) in buildings" :key="id">
       <Building :id="id" />
     </li>

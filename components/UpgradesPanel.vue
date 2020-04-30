@@ -1,6 +1,6 @@
 <template>
   <div class="pl-4">
-    <div class="flex mb-2">
+    <div class="flex bg-gray-300 p-2 rounded-sm">
       <div class="flex-1 cursor-pointer" @click="setCurrent('available')">
         <span :class="{ 'font-bold': current === 'available' }">
           available ({{ Object.keys(available).length }})
@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <div class="overflow-auto" style="height: 27rem;">
+    <div class="bg-gray-100 p-2 overflow-auto" style="height: 30rem;">
       <div
         v-for="(definition, id) in this[current]"
         :key="id"

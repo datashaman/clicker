@@ -59,13 +59,13 @@ export default {
     buildingClass: function () {
       if (this.commerceOperation === 'buy') {
         return this.cost <= this.clicks
-          ? 'font-bold cursor-pointer px-2 my-2'
-          : 'text-gray-700 px-2 my-2'
+          ? 'font-bold cursor-pointer mb-3'
+          : 'font-light text-gray-600 mb-3'
       }
 
       return this.count > 0
-        ? 'font-bold cursor-pointer px-2 text-red-700 my-2'
-        : 'text-gray-700 px-2 my-2'
+        ? 'font-bold cursor-pointer text-red-700 mb-3'
+        : 'text-gray-600 mb-3'
     },
     cost: function () {
       let amount
