@@ -22,7 +22,7 @@
       {{ renderAmount(cps) }}/s
     </div>
 
-    <div class="m-4 text-right text-xs">
+    <div class="m-4 leading-relaxed text-right text-xs">
       <div>
         <div class="font-bold">Cells</div>
         run <fa-icon class="text-green-400" icon="car-battery" />
