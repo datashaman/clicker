@@ -6,6 +6,7 @@ Roadmap:
 
 * ~add upgrades~
 * ~abstract config into a theme file~
+* ~add bought upgrades panel~
 * add achievements
 * add permanent upgrades
 * add production counter (current run and all time) overall
