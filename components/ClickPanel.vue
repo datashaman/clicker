@@ -21,7 +21,7 @@
       {{ renderAmount(cps) }}/s
     </div>
 
-    <div class="mx-2 my-4">
+    <div class="mx-2 my-4 text-right">
       <div class="text-sm">
         <div class="font-bold">Resets</div>
         {{ legacy.resetCounter || resetCounter || 0 }}
