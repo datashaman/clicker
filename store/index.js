@@ -61,10 +61,24 @@ export const actions = {
 
     el = document.body.appendChild(el)
 
-    el.addEventListener('click', () => {
-      let amount = ((2 + Math.random() * 8) / 100) * context.state.clicks
+    el.addEventListener('click', (e) => {
+      let amount = parseInt(
+        ((2.5 + Math.random() * 5) / 100) * context.state.clicks
+      )
       context.commit('click', { amount })
       document.body.removeChild(el)
+
+      let note = document.createElement('DIV')
+      note.innerText = costs.methods.renderAmount(amount)
+      note.style.fontWeight = 'bold'
+      note.style.position = 'absolute'
+      note.style.left = -(Math.random() * 30) + e.pageX + 15 + 'px'
+      note.style.top = -(Math.random() * 25) + e.pageY - 25 + 'px'
+      note = document.body.appendChild(note)
+
+      setTimeout(() => {
+        document.body.removeChild(note)
+      }, 1000)
     })
 
     setTimeout(() => {
