@@ -141,6 +141,86 @@ export const upgrades = {
     },
     unlock: (state) => state.buildings.cursor.count >= 100,
   },
+  cursor_7: {
+    description:
+      'The mouse and cursors each gain +50 for each non-cursor object owned.',
+    name: 'Tera Fingers',
+    cost: 1 * units.giga,
+    icon: 'hand-pointer',
+    reward: (state) => {
+      let nonCursors = Object.keys(state.buildings).reduce((acc, key) => {
+        let building = state.buildings[key]
+        if (key !== 'cursor') {
+          acc += building.count
+        }
+        return acc
+      }, 0)
+
+      state.factor += nonCursors * 50
+      state.buildings.cursor.cps += nonCursors * 50
+    },
+    unlock: (state) => state.buildings.cursor.count >= 150,
+  },
+  cursor_8: {
+    description:
+      'The mouse and cursors each gain +500 for each non-cursor object owned.',
+    name: 'Peta Fingers',
+    cost: 10 * units.giga,
+    icon: 'hand-pointer',
+    reward: (state) => {
+      let nonCursors = Object.keys(state.buildings).reduce((acc, key) => {
+        let building = state.buildings[key]
+        if (key !== 'cursor') {
+          acc += building.count
+        }
+        return acc
+      }, 0)
+
+      state.factor += nonCursors * 500
+      state.buildings.cursor.cps += nonCursors * 500
+    },
+    unlock: (state) => state.buildings.cursor.count >= 200,
+  },
+  cursor_9: {
+    description:
+      'The mouse and cursors each gain +5K for each non-cursor object owned.',
+    name: 'Exa Fingers',
+    cost: 10 * units.tera,
+    icon: 'hand-pointer',
+    reward: (state) => {
+      let nonCursors = Object.keys(state.buildings).reduce((acc, key) => {
+        let building = state.buildings[key]
+        if (key !== 'cursor') {
+          acc += building.count
+        }
+        return acc
+      }, 0)
+
+      state.factor += nonCursors * 5000
+      state.buildings.cursor.cps += nonCursors * 5000
+    },
+    unlock: (state) => state.buildings.cursor.count >= 250,
+  },
+  cursor_10: {
+    description:
+      'The mouse and cursors each gain +50K for each non-cursor object owned.',
+    name: 'Zetta Fingers',
+    cost: 10 * units.peta,
+    icon: 'hand-pointer',
+    reward: (state) => {
+      let nonCursors = Object.keys(state.buildings).reduce((acc, key) => {
+        let building = state.buildings[key]
+        if (key !== 'cursor') {
+          acc += building.count
+        }
+        return acc
+      }, 0)
+
+      state.factor += nonCursors * 50 * units.kilo
+      state.buildings.cursor.cps += nonCursors * 50 * units.kilo
+    },
+    unlock: (state) => state.buildings.cursor.count >= 300,
+  },
   cpu_1: {
     description: 'The CPUs are twice as efficient.',
     name: 'Silicon Board',
