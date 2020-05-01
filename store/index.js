@@ -88,15 +88,17 @@ export const actions = {
     const fontSize = Number(((Math.random() * 4 + 1) / 2).toFixed(1))
 
     const rotate = parseInt(Math.random() * 3) * 30 - 60
+    const rotateClass = (rotate < 0 ? '-' : '') + 'rotate-' + Math.abs(rotate)
 
     el.classList.add('transform')
-    el.classList.add((rotate < 0 ? '-' : '') + 'rotate-' + Math.abs(rotate))
+    el.classList.add(rotateClass)
+    el.classList.add('transition')
 
     el.style.opacity = 0
     el.style.position = 'absolute'
     el.style.fontSize = fontSize + 'em'
-    el.style.left = 80 + Math.random() * (vx - 160) + 'px'
-    el.style.top = 80 + Math.random() * (vy - 160) + 'px'
+    el.style.left = 80 + parseInt(Math.random() * (vx - 160)) + 'px'
+    el.style.top = 80 + parseInt(Math.random() * (vy - 240)) + 'px'
 
     el = document.body.appendChild(el)
 

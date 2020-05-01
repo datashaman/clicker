@@ -37,14 +37,10 @@
         {{ renderAmount(legacy.clicks) }}
       </div>
 
-      <div>
-        earned <fa-icon icon="car-battery" />
-        {{ renderAmount(cells) }}
-      </div>
+      <div>earned {{ renderAmount(cells) }} cells</div>
 
       <div>
-        stored <fa-icon icon="car-battery" />
-        {{ renderAmount(legacy.cells - legacy.spentCells) }}
+        stored {{ renderAmount(legacy.cells - legacy.spentCells) }} cells
       </div>
 
       <div>{{ legacy.resetCounter || resetCounter || 0 }} resets</div>
@@ -65,10 +61,7 @@
         {{ renderAmount(runClicks) }}
       </div>
 
-      <div>
-        earned <fa-icon icon="car-battery" />
-        {{ renderAmount(cells - legacy.cells) }}
-      </div>
+      <div>earned {{ renderAmount(cells - legacy.cells) }} cells</div>
     </div>
 
     <div class="text-center text-4xl">
