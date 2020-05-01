@@ -25,21 +25,18 @@
       <div
         :class="commerceAmountClass(1)"
         @click="setDefaultCommerceAmount({ amount: 1 })"
-        @keyup="resetCommerceAmount()"
       >
         1
       </div>
       <div
         :class="commerceAmountClass(10)"
         @click="setDefaultCommerceAmount({ amount: 10 })"
-        @keyup.ctrl.exact="resetCommerceAmount()"
       >
         10
       </div>
       <div
         :class="commerceAmountClass(100)"
         @click="setDefaultCommerceAmount({ amount: 100 })"
-        @keyup.shift.exact="resetCommerceAmount()"
       >
         100
       </div>
@@ -57,7 +54,7 @@ export default {
   mounted: function () {
     this.$nextTick(() => {
       bean.on(window, 'keydown', this.keydown)
-      bean.on(window, 'keyup', this.keyup)
+      bean.on(window, 'keyup', this.resetCommerceAmount)
       this.resetCommerceAmount()
     })
   },
@@ -77,16 +74,12 @@ export default {
       )
     },
     keydown: function (e) {
-      if (e.ctrlKey) {
+      console.log(e.ctrlKey, e.shiftKey, e.key)
+      if (e.ctrlKey && e.key === 'Control') {
         this.setCommerceAmount({ amount: 10 })
-      } else if (e.shiftKey) {
+      } else if (e.shiftKey && e.key === 'Shift') {
         this.setCommerceAmount({ amount: 100 })
-      } else {
-        this.resetCommerceAmount()
       }
-    },
-    keyup: function () {
-      this.resetCommerceAmount()
     },
   },
 }
