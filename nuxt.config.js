@@ -1,5 +1,7 @@
 import path from 'path'
 
+const sourceVersion = (process.env.SOURCE_VERSION || 'dev').substr(0, 16)
+
 export default {
   mode: 'spa',
   /*
@@ -110,6 +112,6 @@ export default {
     mode: 'postcss',
   },
   env: {
-    sourceVersion: process.env.SOURCE_VERSION || 'dev',
+    sourceVersion,
   },
 }
