@@ -307,7 +307,7 @@ export const upgrades = {
   },
   cpu_type_6: {
     description:
-      'The CPUs are twice as efficient. Internets gain +1% per 5 CPUs.',
+      'The CPUs are twice as efficient. Internets gain +1% per 6 CPUs.',
     name: 'Mechanical Turk',
     cost: 16.5 * units.giga,
     icon: 'microchip',
