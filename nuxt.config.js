@@ -109,4 +109,7 @@ export default {
   purgeCss: {
     mode: 'postcss',
   },
+  env: {
+    sourceVersion: process.env.SOURCE_VERSION || 'dev',
+  },
 }

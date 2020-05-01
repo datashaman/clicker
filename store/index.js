@@ -63,8 +63,8 @@ export const getters = {
       return acc
     }, 0)
   },
-  source_version() {
-    return process.env.SOURCE_VERSION || 'dev'
+  sourceVersion() {
+    return process.env.sourceVersion
   },
 }
 

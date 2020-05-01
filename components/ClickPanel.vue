@@ -70,8 +70,8 @@
 
       <div class="font-bold text-base">Version</div>
 
-      <div v-if="source_version">
-        {{ source_version }}
+      <div v-if="sourceVersion">
+        {{ sourceVersion }}
       </div>
     </div>
 
@@ -94,7 +94,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['cells', 'source_version']),
+    ...mapGetters(['cells', 'sourceVersion']),
     ...mapState([
       'clicks',
       'factor',
