@@ -34,7 +34,7 @@ export default {
 
       setInterval(() => {
         setTimeout(() => {
-          this.$store.dispatch('random')
+          this.$store.dispatch('random', { one: 'one' })
         }, Math.random() * 10000)
       }, 115000)
     })

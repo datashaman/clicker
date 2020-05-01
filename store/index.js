@@ -66,7 +66,24 @@ export const getters = {
 }
 
 export const actions = {
-  random({ commit, state }) {
+  random({ dispatch }, args) {
+    let bolts
+    const randomNumber = Math.random() * 100
+
+    switch (true) {
+      case randomNumber < 5:
+        bolts = Math.random() * 16
+        for (let i = 0; i < bolts; i++) {
+          setTimeout(() => {
+            dispatch('bolt', args)
+          }, 1000 * i + Math.random() * 300 - 150)
+        }
+        break
+      default:
+        dispatch('bolt', args)
+    }
+  },
+  bolt({ commit, state }) {
     let el = document.getElementById('clicker')
 
     if (!el) {
