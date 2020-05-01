@@ -153,9 +153,10 @@ export const actions = {
       note.style.position = 'absolute'
       note.style.left = -(Math.random() * 45) + e.pageX + 22.5 + 'px'
       note.style.top = -(Math.random() * 45) + e.pageY - 25 + 'px'
-      note.classList.add('transition')
+      note.classList.add('transform')
       note.classList.add('duration-700')
       note.classList.add('ease-out')
+      note.classList.add('transition')
       note = document.body.appendChild(note)
 
       setTimeout(() => {
