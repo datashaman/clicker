@@ -23,32 +23,51 @@
     </div>
 
     <div class="m-4 leading-relaxed text-right text-xs">
+      <div class="font-bold">All Time</div>
+
+      <div v-if="legacy.started">
+        started
+        <span :title="new Date(legacy.started).toLocaleString()">
+          {{ formatDate(legacy.started) }}
+        </span>
+      </div>
+
+      <div v-if="legacy.clicks">
+        <fa-icon icon="bolt" />
+        {{ renderAmount(legacy.clicks) }}
+      </div>
+
       <div>
-        <div class="font-bold">Cells</div>
-        run <fa-icon class="text-green-400" icon="car-battery" />
-        {{ renderAmount(cells - legacy.cells) }}<br />
+        earned <fa-icon class="text-green-400" icon="car-battery" />
+        {{ renderAmount(cells) }}
+      </div>
+
+      <div>
         stored <fa-icon class="text-green-400" icon="car-battery" />
         {{ renderAmount(legacy.cells - legacy.spentCells) }}
       </div>
-      <div v-if="legacy.clicks">
-        <div class="font-bold">All Time</div>
-        {{ legacy.resetCounter || resetCounter || 0 }} resets<br />
-        <fa-icon icon="bolt" />
-        {{ renderAmount(legacy.clicks) }}<br />
-        <fa-icon class="text-green-400" icon="car-battery" />
-        {{ renderAmount(cells) }}
-      </div>
-      <div v-if="legacy.started">
-        <div class="font-bold">Started</div>
-        <div :title="new Date(legacy.started).toLocaleString()">
-          {{ formatDate(legacy.started) }}
-        </div>
-      </div>
+
+      <div>{{ legacy.resetCounter || resetCounter || 0 }} resets</div>
+
+      <div class="font-bold">Run</div>
+
       <div v-if="started">
-        <div class="font-bold">Started Run</div>
-        <div :title="new Date(started).toLocaleString()">
-          {{ formatDate(started) }}
+        <div>
+          started
+          <span :title="new Date(started).toLocaleString()">
+            {{ formatDate(started) }}
+          </span>
         </div>
+      </div>
+
+      <div v-if="legacy.clicks">
+        <fa-icon icon="bolt" />
+        {{ renderAmount(runClicks) }}
+      </div>
+
+      <div>
+        earned <fa-icon class="text-green-400" icon="car-battery" />
+        {{ renderAmount(cells - legacy.cells) }}
       </div>
     </div>
 
@@ -78,6 +97,7 @@ export default {
       'buildings',
       'legacy',
       'resetCounter',
+      'runClicks',
       'started',
     ]),
     cps: function () {
@@ -112,9 +132,7 @@ export default {
         document.body.removeChild(el)
       }, 1000)
     },
-    formatDate: (dt) => {
-      return format(dt)
-    },
+    formatDate: format,
     reset: function () {
       if (confirm('Are you sure?')) {
         this.$store.commit('reset')

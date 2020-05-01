@@ -20,6 +20,7 @@ const initialState = () => {
       started: started,
       upgrades: [],
     },
+    runClicks: 0,
     started: started,
     upgrades: [],
   }
@@ -66,6 +67,14 @@ export const getters = {
 
 export const actions = {
   random(context) {
+    let el = document.getElementById('clicker')
+
+    if (!el) {
+      return
+    }
+
+    el = el.cloneNode(true)
+
     const vx = Math.max(
       document.documentElement.clientWidth,
       window.innerWidth || 0
@@ -77,8 +86,6 @@ export const actions = {
     )
 
     const fontSize = Number(((Math.random() * 4 + 1) / 2).toFixed(1))
-
-    let el = document.getElementById('clicker').cloneNode(true)
 
     const rotate = parseInt(Math.random() * 3) * 45 - 45
     el.classList.add(rotate < 0 ? '-' : '' + 'rotate-' + Math.abs(rotate))
@@ -180,27 +187,56 @@ export const mutations = {
   },
   click(state, { amount }) {
     state.clicks += amount
+    state.runClicks += amount
     if (state.legacy) {
       state.legacy.clicks += amount
     }
   },
   migrate(state) {
+    console.log('migrating!')
+
+    if (!state.legacy) {
+      state.legacy = {
+        clicks: 0,
+        cells: 0,
+        resetCounter: 0,
+        spentCells: 0,
+        started: new Date(),
+        upgrades: [],
+      }
+    }
+
+    if (!state.legacy.cells) {
+      state.legacy.cells = 0
+    }
+
+    if (!state.legacy.spentCells) {
+      state.legacy.spentCells = 0
+    }
+
     if (!state.buildings.internet) {
       state.buildings.internet = {
         count: 0,
         cps: buildings.internet.cps,
       }
     }
+
+    if (!state.runClicks) {
+      state.runClicks = 0
+    }
   },
   reset(state) {
     const s = initialState()
     const legacy = state.legacy || {}
-    legacy.cells = parseInt(state.cells)
+    legacy.cells = parseInt(this.getters.cells)
     const resetCounter = state.resetCounter || legacy.resetCounter || 0
+
     Object.keys(s).forEach((key) => {
       state[key] = s[key]
     })
+
     state.legacy = legacy
+
     state.legacy.resetCounter = resetCounter + 1
     delete state.resetCounter
   },
