@@ -503,7 +503,7 @@ export const upgrades = {
   },
   dataCenter_3: {
     description: 'The dataCenters are twice as efficient.',
-    name: 'Blockchain Farm',
+    name: 'Bitcoin Farm',
     cost: 10 * units.giga,
     icon: 'database',
     reward: (state) => {
