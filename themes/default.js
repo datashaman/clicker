@@ -2,6 +2,16 @@ import costs from '~/mixins/costs'
 
 const units = costs.data().units
 
+const countNonCursors = (state) => {
+  return Object.keys(state.buildings).reduce((acc, key) => {
+    let building = state.buildings[key]
+    if (key !== 'cursor') {
+      acc += building.count
+    }
+    return acc
+  }, 0)
+}
+
 export const buildings = {
   cursor: {
     count: 10,
@@ -94,14 +104,7 @@ export const upgrades = {
     cost: 100 * units.kilo,
     icon: 'hand-pointer',
     reward: (state) => {
-      let nonCursors = Object.keys(state.buildings).reduce((acc, key) => {
-        let building = state.buildings[key]
-        if (key !== 'cursor') {
-          acc += building.count
-        }
-        return acc
-      }, 0)
-
+      let nonCursors = countNonCursors(state)
       state.factor += nonCursors * 0.1
       state.buildings.cursor.cps += nonCursors * 0.1
     },
@@ -114,14 +117,7 @@ export const upgrades = {
     cost: 10 * units.mega,
     icon: 'hand-pointer',
     reward: (state) => {
-      let nonCursors = Object.keys(state.buildings).reduce((acc, key) => {
-        let building = state.buildings[key]
-        if (key !== 'cursor') {
-          acc += building.count
-        }
-        return acc
-      }, 0)
-
+      let nonCursors = countNonCursors(state)
       state.factor += nonCursors * 0.5
       state.buildings.cursor.cps += nonCursors * 0.5
     },
@@ -134,14 +130,7 @@ export const upgrades = {
     cost: 100 * units.mega,
     icon: 'hand-pointer',
     reward: (state) => {
-      let nonCursors = Object.keys(state.buildings).reduce((acc, key) => {
-        let building = state.buildings[key]
-        if (key !== 'cursor') {
-          acc += building.count
-        }
-        return acc
-      }, 0)
-
+      let nonCursors = countNonCursors(state)
       state.factor += nonCursors * 5
       state.buildings.cursor.cps += nonCursors * 5
     },
@@ -154,14 +143,7 @@ export const upgrades = {
     cost: 1 * units.giga,
     icon: 'hand-pointer',
     reward: (state) => {
-      let nonCursors = Object.keys(state.buildings).reduce((acc, key) => {
-        let building = state.buildings[key]
-        if (key !== 'cursor') {
-          acc += building.count
-        }
-        return acc
-      }, 0)
-
+      let nonCursors = countNonCursors(state)
       state.factor += nonCursors * 50
       state.buildings.cursor.cps += nonCursors * 50
     },
@@ -174,14 +156,7 @@ export const upgrades = {
     cost: 10 * units.giga,
     icon: 'hand-pointer',
     reward: (state) => {
-      let nonCursors = Object.keys(state.buildings).reduce((acc, key) => {
-        let building = state.buildings[key]
-        if (key !== 'cursor') {
-          acc += building.count
-        }
-        return acc
-      }, 0)
-
+      let nonCursors = countNonCursors(state)
       state.factor += nonCursors * 500
       state.buildings.cursor.cps += nonCursors * 500
     },
@@ -194,14 +169,7 @@ export const upgrades = {
     cost: 10 * units.tera,
     icon: 'hand-pointer',
     reward: (state) => {
-      let nonCursors = Object.keys(state.buildings).reduce((acc, key) => {
-        let building = state.buildings[key]
-        if (key !== 'cursor') {
-          acc += building.count
-        }
-        return acc
-      }, 0)
-
+      let nonCursors = countNonCursors(state)
       state.factor += nonCursors * 5000
       state.buildings.cursor.cps += nonCursors * 5000
     },
@@ -214,14 +182,7 @@ export const upgrades = {
     cost: 10 * units.peta,
     icon: 'hand-pointer',
     reward: (state) => {
-      let nonCursors = Object.keys(state.buildings).reduce((acc, key) => {
-        let building = state.buildings[key]
-        if (key !== 'cursor') {
-          acc += building.count
-        }
-        return acc
-      }, 0)
-
+      let nonCursors = countNonCursors(state)
       state.factor += nonCursors * 50 * units.kilo
       state.buildings.cursor.cps += nonCursors * 50 * units.kilo
     },

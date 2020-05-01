@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <div class="bg-gray-100 p-4 overflow-auto" style="height: 30rem;">
+    <div class="bg-gray-100 p-4 overflow-auto" style="height: 34rem;">
       <div
         v-for="(definition, id) in this[current]"
         :key="id"
