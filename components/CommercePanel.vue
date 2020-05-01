@@ -23,25 +23,25 @@
 
     <div class="flex">
       <div
-        class="flex-1"
+        :class="commerceAmountClass(1)"
         @click="setDefaultCommerceAmount({ amount: 1 })"
         @keyup="resetCommerceAmount()"
       >
-        <div :class="commerceAmountClass(1)">1</div>
+        1
       </div>
       <div
-        class="flex-1"
+        :class="commerceAmountClass(10)"
         @click="setDefaultCommerceAmount({ amount: 10 })"
         @keyup.ctrl.exact="resetCommerceAmount()"
       >
-        <div :class="commerceAmountClass(10)">10</div>
+        10
       </div>
       <div
-        class="flex-1"
+        :class="commerceAmountClass(100)"
         @click="setDefaultCommerceAmount({ amount: 100 })"
         @keyup.shift.exact="resetCommerceAmount()"
       >
-        <div :class="commerceAmountClass(100)">100</div>
+        100
       </div>
     </div>
   </div>
@@ -69,7 +69,12 @@ export default {
       'setCommerceAmount',
     ]),
     commerceAmountClass(amount) {
-      return amount === this.commerceAmount ? 'font-bold' : 'font-light'
+      return (
+        'flex-1 ' +
+        (amount === this.commerceAmount
+          ? 'font-bold'
+          : 'font-light cursor-pointer')
+      )
     },
     keydown: function (e) {
       if (e.ctrlKey) {
