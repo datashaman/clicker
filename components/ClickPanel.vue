@@ -37,10 +37,11 @@
         {{ renderAmount(legacy.clicks) }}
       </div>
 
-      <div>earned {{ renderAmount(cells) }} cells</div>
-
       <div>
-        stored {{ renderAmount(legacy.cells - legacy.spentCells) }} cells
+        <span title="stored">
+          {{ renderAmount(legacy.cells - legacy.spentCells) }}
+        </span>
+        / <span title="earned">{{ renderAmount(cells) }}</span> cells
       </div>
 
       <div>{{ legacy.resetCounter || resetCounter || 0 }} resets</div>
@@ -61,7 +62,11 @@
         {{ renderAmount(runClicks) }}
       </div>
 
-      <div>earned {{ renderAmount(cells - legacy.cells) }} cells</div>
+      <div>
+        <span title="earned">
+          {{ renderAmount(cells - legacy.cells) }} cells
+        </span>
+      </div>
     </div>
 
     <div class="text-center text-4xl">
