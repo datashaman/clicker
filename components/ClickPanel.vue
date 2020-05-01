@@ -67,6 +67,12 @@
           {{ renderAmount(cells - legacy.cells) }} cells
         </span>
       </div>
+
+      <div class="font-bold text-base">Version</div>
+
+      <div v-if="source_version">
+        {{ source_version }}
+      </div>
     </div>
 
     <div class="text-center text-4xl">
@@ -88,7 +94,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['cells']),
+    ...mapGetters(['cells', 'source_version']),
     ...mapState([
       'clicks',
       'factor',

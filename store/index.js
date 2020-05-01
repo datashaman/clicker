@@ -44,12 +44,12 @@ export const state = () => initialState()
 const units = costs.data().units
 
 export const getters = {
-  cells: function (state) {
+  cells(state) {
     const clicks = state.legacy.clicks || 0
 
     return parseInt(Math.cbrt(clicks / (1 * units.tera)))
   },
-  effectiveCps: function (state) {
+  effectiveCps(state) {
     state = JSON.parse(JSON.stringify(state))
 
     state.upgrades.forEach((id) => {
@@ -62,6 +62,9 @@ export const getters = {
       acc += building.count * building.cps
       return acc
     }, 0)
+  },
+  source_version() {
+    return process.env.SOURCE_VERSION || 'dev'
   },
 }
 
