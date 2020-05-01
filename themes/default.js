@@ -45,6 +45,12 @@ export const buildings = {
     cps: 7.8 * units.kilo,
     icon: 'database',
   },
+  internet: {
+    count: 0,
+    cost: 330 * units.mega,
+    cps: 44 * units.kilo,
+    icon: 'globe',
+  },
 }
 
 export const upgrades = {
@@ -338,6 +344,22 @@ export const upgrades = {
     unlock: (state) =>
       state.buildings.cpu.count >= 1 && state.buildings.dataCenter.count >= 15,
   },
+  cpu_type_6: {
+    description:
+      'The CPUs are twice as efficient. Internets gain +1% per 5 CPUs.',
+    name: 'Cloud Computing',
+    cost: 16.5 * units.giga,
+    icon: 'microchip',
+    reward: (state) => {
+      state.buildings.cpu.cps *= 2
+      state.buildings.internet.cps +=
+        (1 / 100) *
+        state.buildings.internet.cps *
+        (state.buildings.cpu.count / 6)
+    },
+    unlock: (state) =>
+      state.buildings.cpu.count >= 1 && state.buildings.internet.count >= 15,
+  },
   process_1: {
     description: 'The processes are twice as efficient.',
     name: 'RAM Upgrade',
@@ -498,44 +520,44 @@ export const upgrades = {
     },
     unlock: (state) => state.buildings.cluster.count >= 50,
   },
-  dataCenter_1: {
-    description: 'The dataCenters are twice as efficient.',
-    name: 'Multi Region',
+  internet_1: {
+    description: 'The internets are twice as efficient.',
+    name: 'Packet Switching',
     cost: 200 * units.mega,
-    icon: 'database',
+    icon: 'globe',
     reward: (state) => {
-      state.buildings.dataCenter.cps *= 2
+      state.buildings.internet.cps *= 2
     },
-    unlock: (state) => state.buildings.dataCenter.count >= 1,
+    unlock: (state) => state.buildings.internet.count >= 1,
   },
-  dataCenter_2: {
-    description: 'The dataCenters are twice as efficient.',
-    name: 'Global CDN',
+  internet_2: {
+    description: 'The internets are twice as efficient.',
+    name: 'ARPANET',
     cost: 1 * units.giga,
-    icon: 'database',
+    icon: 'globe',
     reward: (state) => {
-      state.buildings.dataCenter.cps *= 2
+      state.buildings.internet.cps *= 2
     },
-    unlock: (state) => state.buildings.dataCenter.count >= 5,
+    unlock: (state) => state.buildings.internet.count >= 5,
   },
-  dataCenter_3: {
-    description: 'The dataCenters are twice as efficient.',
-    name: 'Blockchain Farm',
+  internet_3: {
+    description: 'The internets are twice as efficient.',
+    name: 'World Wide Web',
     cost: 10 * units.giga,
-    icon: 'database',
+    icon: 'globe',
     reward: (state) => {
-      state.buildings.dataCenter.cps *= 2
+      state.buildings.internet.cps *= 2
     },
-    unlock: (state) => state.buildings.dataCenter.count >= 25,
+    unlock: (state) => state.buildings.internet.count >= 25,
   },
-  dataCenter_4: {
-    description: 'The dataCenters are twice as efficient.',
-    name: 'Self-healing Hardware',
+  internet_4: {
+    description: 'The internets are twice as efficient.',
+    name: 'Electronic Messaging',
     cost: 1 * units.tera,
-    icon: 'database',
+    icon: 'globe',
     reward: (state) => {
-      state.buildings.dataCenter.cps *= 2
+      state.buildings.internet.cps *= 2
     },
-    unlock: (state) => state.buildings.dataCenter.count >= 50,
+    unlock: (state) => state.buildings.internet.count >= 50,
   },
 }

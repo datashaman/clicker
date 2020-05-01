@@ -62,6 +62,7 @@ export default {
               'faCogs',
               'faDatabase',
               'faDesktop',
+              'faGlobe',
               'faHandPointer',
               'faMicrochip',
               'faNetworkWired',
