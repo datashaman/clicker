@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-300 text-center p-2 rounded-sm">
+  <div class="bg-gray-300 text-center p-2 rounded-sm h-16">
     <div class="flex">
       <div
         class="flex-1 cursor-pointer"
