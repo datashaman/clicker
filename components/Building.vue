@@ -98,8 +98,7 @@ export default {
       let state = JSON.parse(JSON.stringify(this.$store.state))
 
       state.upgrades.forEach((id) => {
-        let upgrade = upgrades[id]
-        upgrade.reward(state)
+        upgrades[id].reward(state)
       })
 
       return state.buildings[this.id].cps

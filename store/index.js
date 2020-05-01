@@ -66,7 +66,7 @@ export const getters = {
 }
 
 export const actions = {
-  random(context) {
+  random({ commit, state }) {
     let el = document.getElementById('clicker')
 
     if (!el) {
@@ -150,7 +150,9 @@ export const actions = {
         el.style.opacity = 0
 
         setTimeout(() => {
-          document.body.removeChild(el)
+          if (document.body.contains(el)) {
+            document.body.removeChild(el)
+          }
         }, 3000)
       }
 
