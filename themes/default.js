@@ -238,6 +238,16 @@ export const upgrades = {
     },
     unlock: (state) => state.buildings.cpu.count >= 100,
   },
+  cpu_6: {
+    description: 'The CPUs are twice as efficient.',
+    name: 'System-on-a-Chip',
+    cost: 50 * units.giga,
+    icon: 'microchip',
+    reward: (state) => {
+      state.buildings.cpu.cps *= 2
+    },
+    unlock: (state) => state.buildings.cpu.count >= 150,
+  },
   cpu_type_1: {
     description: 'The CPUs are twice as efficient. Processes gain +1% per CPU.',
     name: 'Floating Point Unit',
@@ -381,6 +391,16 @@ export const upgrades = {
     },
     unlock: (state) => state.buildings.process.count >= 100,
   },
+  process_6: {
+    description: 'The processes are twice as efficient.',
+    name: '',
+    cost: 550 * units.giga,
+    icon: 'project-diagram',
+    reward: (state) => {
+      state.buildings.process.cps *= 2
+    },
+    unlock: (state) => state.buildings.process.count >= 150,
+  },
   service_1: {
     description: 'The services are twice as efficient.',
     name: 'REST API',
@@ -423,23 +443,23 @@ export const upgrades = {
   },
   service_5: {
     description: 'The services are twice as efficient.',
-    name: 'WASM Rewrite',
-    cost: 600 * units.mega,
-    icon: 'cogs',
-    reward: (state) => {
-      state.buildings.service.cps *= 2
-    },
-    unlock: (state) => state.buildings.service.count >= 50,
-  },
-  service_6: {
-    description: 'The services are twice as efficient.',
-    name: 'Lambda Functions',
+    name: 'GraphQL Integration',
     cost: 60 * units.giga,
     icon: 'cogs',
     reward: (state) => {
       state.buildings.service.cps *= 2
     },
     unlock: (state) => state.buildings.service.count >= 100,
+  },
+  service_6: {
+    description: 'The services are twice as efficient.',
+    name: 'Lambda Functions',
+    cost: 6 * units.tera,
+    icon: 'cogs',
+    reward: (state) => {
+      state.buildings.service.cps *= 2
+    },
+    unlock: (state) => state.buildings.service.count >= 150,
   },
   computer_1: {
     description: 'The computers are twice as efficient.',
@@ -491,6 +511,16 @@ export const upgrades = {
     },
     unlock: (state) => state.buildings.computer.count >= 100,
   },
+  computer_6: {
+    description: 'The computers are twice as efficient.',
+    name: 'Quantum Cryptography',
+    cost: 65 * units.tera,
+    icon: 'desktop',
+    reward: (state) => {
+      state.buildings.computer.cps *= 2
+    },
+    unlock: (state) => state.buildings.computer.count >= 150,
+  },
   cluster_1: {
     description: 'The clusters are twice as efficient.',
     name: 'Distributed Directory',
@@ -540,6 +570,16 @@ export const upgrades = {
       state.buildings.cluster.cps *= 2
     },
     unlock: (state) => state.buildings.cluster.count >= 100,
+  },
+  cluster_6: {
+    description: 'The clusters are twice as efficient.',
+    name: 'Container Orchestration',
+    cost: 700 * units.tera,
+    icon: 'network-wired',
+    reward: (state) => {
+      state.buildings.cluster.cps *= 2
+    },
+    unlock: (state) => state.buildings.cluster.count >= 150,
   },
   dataCenter_1: {
     description: 'The dataCenters are twice as efficient.',
@@ -591,6 +631,16 @@ export const upgrades = {
     },
     unlock: (state) => state.buildings.dataCenter.count >= 100,
   },
+  dataCenter_6: {
+    description: 'The dataCenters are twice as efficient.',
+    name: 'Front-flow Air Handling Units',
+    cost: 10 * units.peta,
+    icon: 'database',
+    reward: (state) => {
+      state.buildings.dataCenter.cps *= 2
+    },
+    unlock: (state) => state.buildings.dataCenter.count >= 150,
+  },
   internet_1: {
     description: 'The internets are twice as efficient.',
     name: 'Packet Switching',
@@ -640,5 +690,15 @@ export const upgrades = {
       state.buildings.internet.cps *= 2
     },
     unlock: (state) => state.buildings.internet.count >= 100,
+  },
+  internet_6: {
+    description: 'The internets are twice as efficient.',
+    name: 'WebSockets',
+    cost: 165 * units.peta,
+    icon: 'globe',
+    reward: (state) => {
+      state.buildings.internet.cps *= 2
+    },
+    unlock: (state) => state.buildings.internet.count >= 150,
   },
 }
