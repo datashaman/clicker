@@ -633,7 +633,7 @@ export const upgrades = {
   },
   internet_5: {
     description: 'The internets are twice as efficient.',
-    name: 'Realtime Teleconference',
+    name: 'VoIP',
     cost: 1.65 * units.peta,
     icon: 'globe',
     reward: (state) => {
