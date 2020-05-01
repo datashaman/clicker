@@ -38,12 +38,12 @@
       </div>
 
       <div>
-        earned <fa-icon class="text-green-400" icon="car-battery" />
+        earned <fa-icon icon="car-battery" />
         {{ renderAmount(cells) }}
       </div>
 
       <div>
-        stored <fa-icon class="text-green-400" icon="car-battery" />
+        stored <fa-icon icon="car-battery" />
         {{ renderAmount(legacy.cells - legacy.spentCells) }}
       </div>
 
@@ -66,7 +66,7 @@
       </div>
 
       <div>
-        earned <fa-icon class="text-green-400" icon="car-battery" />
+        earned <fa-icon icon="car-battery" />
         {{ renderAmount(cells - legacy.cells) }}
       </div>
     </div>
