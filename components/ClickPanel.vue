@@ -40,11 +40,15 @@
       </div>
       <div v-if="legacy.started">
         <div class="font-bold">Started</div>
-        {{ new Date(legacy.started).toLocaleString() }}
+        <div :title="new Date(legacy.started).toLocaleString()">
+          {{ formatDate(legacy.started) }}
+        </div>
       </div>
       <div v-if="started">
         <div class="font-bold">Started Run</div>
-        {{ new Date(started).toLocaleString() }}
+        <div :title="new Date(started).toLocaleString()">
+          {{ formatDate(started) }}
+        </div>
       </div>
     </div>
 
@@ -54,8 +58,9 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { format } from 'timeago.js'
 import costs from '~/mixins/costs'
+import { mapGetters, mapState } from 'vuex'
 import { upgrades } from '~/themes/default'
 
 export default {
@@ -106,6 +111,9 @@ export default {
         this.manualCps -= state.factor
         document.body.removeChild(el)
       }, 1000)
+    },
+    formatDate: (dt) => {
+      return format(dt)
     },
     reset: function () {
       if (confirm('Are you sure?')) {
