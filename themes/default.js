@@ -481,6 +481,46 @@ export const upgrades = {
     },
     unlock: (state) => state.buildings.cluster.count >= 50,
   },
+  dataCenter_1: {
+    description: 'The dataCenters are twice as efficient.',
+    name: 'Multi Region',
+    cost: 200 * units.mega,
+    icon: 'database',
+    reward: (state) => {
+      state.buildings.dataCenter.cps *= 2
+    },
+    unlock: (state) => state.buildings.dataCenter.count >= 1,
+  },
+  dataCenter_2: {
+    description: 'The dataCenters are twice as efficient.',
+    name: 'Global CDN',
+    cost: 1 * units.giga,
+    icon: 'database',
+    reward: (state) => {
+      state.buildings.dataCenter.cps *= 2
+    },
+    unlock: (state) => state.buildings.dataCenter.count >= 5,
+  },
+  dataCenter_3: {
+    description: 'The dataCenters are twice as efficient.',
+    name: 'Blockchain Farm',
+    cost: 10 * units.giga,
+    icon: 'database',
+    reward: (state) => {
+      state.buildings.dataCenter.cps *= 2
+    },
+    unlock: (state) => state.buildings.dataCenter.count >= 25,
+  },
+  dataCenter_4: {
+    description: 'The dataCenters are twice as efficient.',
+    name: 'Self-healing Hardware',
+    cost: 1 * units.tera,
+    icon: 'database',
+    reward: (state) => {
+      state.buildings.dataCenter.cps *= 2
+    },
+    unlock: (state) => state.buildings.dataCenter.count >= 50,
+  },
   internet_1: {
     description: 'The internets are twice as efficient.',
     name: 'Packet Switching',
