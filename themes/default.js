@@ -251,6 +251,16 @@ export const upgrades = {
     },
     unlock: (state) => state.buildings.cpu.count >= 25,
   },
+  cpu_4: {
+    description: 'The CPUs are twice as efficient.',
+    name: 'Superconducting Surface',
+    cost: 5 * units.mega,
+    icon: 'microchip',
+    reward: (state) => {
+      state.buildings.cpu.cps *= 2
+    },
+    unlock: (state) => state.buildings.cpu.count >= 50,
+  },
   cpu_type_1: {
     description: 'The CPUs are twice as efficient. Processes gain +1% per CPU.',
     name: 'Floating Point Unit',
@@ -358,6 +368,16 @@ export const upgrades = {
     },
     unlock: (state) => state.buildings.process.count >= 25,
   },
+  process_4: {
+    description: 'The processes are twice as efficient.',
+    name: 'Assembler Rewrite',
+    cost: 55 * units.mega,
+    icon: 'project-diagram',
+    reward: (state) => {
+      state.buildings.process.cps *= 2
+    },
+    unlock: (state) => state.buildings.process.count >= 50,
+  },
   service_1: {
     description: 'The services are twice as efficient.',
     name: 'REST API',
@@ -387,6 +407,16 @@ export const upgrades = {
       state.buildings.service.cps *= 2
     },
     unlock: (state) => state.buildings.service.count >= 25,
+  },
+  service_4: {
+    description: 'The services are twice as efficient.',
+    name: 'WASM Rewrite',
+    cost: 600 * units.mega,
+    icon: 'cogs',
+    reward: (state) => {
+      state.buildings.service.cps *= 2
+    },
+    unlock: (state) => state.buildings.service.count >= 50,
   },
   computer_1: {
     description: 'The computers are twice as efficient.',
@@ -418,6 +448,16 @@ export const upgrades = {
     },
     unlock: (state) => state.buildings.computer.count >= 25,
   },
+  computer_4: {
+    description: 'The computers are twice as efficient.',
+    name: 'Qubit Core',
+    cost: 6.5 * units.giga,
+    icon: 'desktop',
+    reward: (state) => {
+      state.buildings.computer.cps *= 2
+    },
+    unlock: (state) => state.buildings.computer.count >= 50,
+  },
   cluster_1: {
     description: 'The clusters are twice as efficient.',
     name: 'Distributed Directory',
@@ -448,6 +488,16 @@ export const upgrades = {
     },
     unlock: (state) => state.buildings.cluster.count >= 25,
   },
+  cluster_4: {
+    description: 'The clusters are twice as efficient.',
+    name: 'ICO Fundraiser',
+    cost: 70 * units.giga,
+    icon: 'network-wired',
+    reward: (state) => {
+      state.buildings.cluster.cps *= 2
+    },
+    unlock: (state) => state.buildings.cluster.count >= 50,
+  },
   dataCenter_1: {
     description: 'The dataCenters are twice as efficient.',
     name: 'Multi Region',
@@ -477,5 +527,15 @@ export const upgrades = {
       state.buildings.dataCenter.cps *= 2
     },
     unlock: (state) => state.buildings.dataCenter.count >= 25,
+  },
+  dataCenter_4: {
+    description: 'The dataCenters are twice as efficient.',
+    name: 'Self-healing Hardware',
+    cost: 1 * units.tera,
+    icon: 'database',
+    reward: (state) => {
+      state.buildings.dataCenter.cps *= 2
+    },
+    unlock: (state) => state.buildings.dataCenter.count >= 50,
   },
 }
