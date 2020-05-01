@@ -184,6 +184,14 @@ export const mutations = {
       state.legacy.clicks += amount
     }
   },
+  migrate(state) {
+    if (!state.buildings.internet) {
+      state.buildings.internet = {
+        count: 0,
+        cps: buildings.internet.cps,
+      }
+    }
+  },
   reset(state) {
     const s = initialState()
     const legacy = state.legacy || {}

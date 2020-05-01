@@ -30,6 +30,8 @@ export default {
   },
   mounted: function () {
     this.$nextTick(() => {
+      this.$store.commit('migrate')
+
       setInterval(() => {
         setTimeout(() => {
           this.$store.dispatch('random')
