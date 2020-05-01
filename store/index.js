@@ -120,6 +120,12 @@ export const actions = {
     el.classList.add('transform')
     el.classList.add(rotateClass)
 
+    if (args.storm) {
+      el.classList.add('duration-500')
+    } else {
+      el.classList.add('duration-3000')
+    }
+
     el.style.opacity = 0
     el.style.position = 'absolute'
     el.style.fontSize = fontSize + 'em'
@@ -168,6 +174,10 @@ export const actions = {
 
     el.style.opacity = 1
 
+    const duration = args.storm
+      ? 2000 + Math.random() * 2000
+      : 5000 + Math.random() * 7000
+
     setTimeout(() => {
       if (document.body.contains(el)) {
         el.style.opacity = 0
@@ -178,7 +188,7 @@ export const actions = {
           }
         }, 3000)
       }
-    }, 5000 + Math.random() * 7000)
+    }, duration)
   },
 }
 
