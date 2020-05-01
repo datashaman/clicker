@@ -1,3 +1,4 @@
+import bean from 'bean'
 import costs from '~/mixins/costs'
 import { buildings, upgrades } from '~/themes/default'
 
@@ -8,7 +9,6 @@ const initialState = () => {
     buildings: {},
     clicks: 0,
     commerceAmount: 1,
-    commerceAmounts: [1, 10, 100],
     commerceOperation: 'buy',
     defaultCommerceAmount: 1,
     factor: 1,
@@ -92,7 +92,6 @@ export const actions = {
 
     el.classList.add('transform')
     el.classList.add(rotateClass)
-    el.classList.add('transition')
 
     el.style.opacity = 0
     el.style.position = 'absolute'
@@ -103,16 +102,13 @@ export const actions = {
     el = document.body.appendChild(el)
 
     el.classList.add('transition')
-    el.classList.add('duration-3000')
-    el.classList.add('ease-in-out')
 
-    let listener
+    bean.one(el, 'click', (e) => {
+      el.style.opacity = 0
 
-    listener = el.addEventListener('click', (e) => {
-      let amount = parseInt(
-        ((2.5 + Math.random() * 5) / 100) * context.state.clicks
-      )
-      context.commit('click', { amount })
+      let amount = parseInt(((2.5 + Math.random() * 5) / 100) * state.clicks)
+
+      commit('click', { amount })
 
       let note = document.createElement('DIV')
       note.innerText = costs.methods.renderAmount(amount)
@@ -127,8 +123,6 @@ export const actions = {
 
       setTimeout(() => {
         if (document.body.contains(el)) {
-          el.style.opacity = 0
-
           setTimeout(() => {
             document.body.removeChild(el)
           }, 3000)
@@ -139,8 +133,6 @@ export const actions = {
           document.body.removeChild(note)
         }, 800)
       }, 250)
-
-      window.removeEventListener('click', listener)
     })
 
     el.style.opacity = 1
@@ -155,8 +147,6 @@ export const actions = {
           }
         }, 3000)
       }
-
-      window.removeEventListener('click', listener)
     }, 5000 + Math.random() * 7000)
   },
 }

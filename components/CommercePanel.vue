@@ -21,39 +21,43 @@
       </div>
     </div>
 
-    <ul class="w-full">
-      <li
-        v-for="amount in commerceAmounts"
-        :key="amount"
-        class="w-1/3 inline-block cursor-pointer"
-        @click="setDefaultCommerceAmount({ amount })"
+    <div class="flex">
+      <div
+        class="flex-1"
+        @click="setDefaultCommerceAmount({ amount: 1 })"
         @keyup="resetCommerceAmount()"
       >
-        <template v-if="amount === commerceAmount">
-          <div class="font-bold">
-            {{ amount }}
-          </div>
-        </template>
-        <template v-else>
-          <div class="font-light">
-            {{ amount }}
-          </div>
-        </template>
-      </li>
-    </ul>
+        <div :class="commerceAmountClass(1)">1</div>
+      </div>
+      <div
+        class="flex-1"
+        @click="setDefaultCommerceAmount({ amount: 10 })"
+        @keyup.ctrl.exact="resetCommerceAmount()"
+      >
+        <div :class="commerceAmountClass(10)">10</div>
+      </div>
+      <div
+        class="flex-1"
+        @click="setDefaultCommerceAmount({ amount: 100 })"
+        @keyup.shift.exact="resetCommerceAmount()"
+      >
+        <div :class="commerceAmountClass(100)">100</div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
+import bean from 'bean'
 import { mapMutations, mapState } from 'vuex'
 
 export default {
   computed: {
-    ...mapState(['commerceAmount', 'commerceAmounts', 'commerceOperation']),
+    ...mapState(['commerceAmount', 'commerceOperation']),
   },
   mounted: function () {
     this.$nextTick(() => {
-      window.addEventListener('keydown', this.keydown)
-      window.addEventListener('keyup', this.keyup)
+      bean.on(window, 'keydown', this.keydown)
+      bean.on(window, 'keyup', this.keyup)
       this.resetCommerceAmount()
     })
   },
@@ -64,6 +68,9 @@ export default {
       'setCommerceOperation',
       'setCommerceAmount',
     ]),
+    commerceAmountClass(amount) {
+      return amount === this.commerceAmount ? 'font-bold' : 'font-light'
+    },
     keydown: function (e) {
       if (e.ctrlKey) {
         this.setCommerceAmount({ amount: 10 })
