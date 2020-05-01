@@ -145,7 +145,13 @@ export default {
     },
     formatDate: format,
     reset: function () {
-      if (confirm('Are you sure?')) {
+      if (
+        confirm(
+          'This will reset to the beginning. It will retain some statistics ' +
+            'and maybe allow you to upgrade (if you have cells and the upgrade ' +
+            'system is ready).\n\nAre you sure you want to reset?\n\n'
+        )
+      ) {
         this.$store.commit('reset')
       }
     },
