@@ -74,7 +74,6 @@ export default {
       )
     },
     keydown: function (e) {
-      console.log(e.ctrlKey, e.shiftKey, e.key)
       if (e.ctrlKey && e.key === 'Control') {
         this.setCommerceAmount({ amount: 10 })
       } else if (e.shiftKey && e.key === 'Shift') {
