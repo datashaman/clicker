@@ -75,31 +75,33 @@ export const actions = {
 
     el = el.cloneNode(true)
 
-    const vx = Math.max(
+    const vx = Math.min(
       document.documentElement.clientWidth,
       window.innerWidth || 0
     )
 
-    const vy = Math.max(
+    const vy = Math.min(
       document.documentElement.clientHeight,
       window.innerHeight || 0
     )
 
     const fontSize = Number(((Math.random() * 4 + 1) / 2).toFixed(1))
 
-    const rotate = parseInt(Math.random() * 3) * 45 - 45
-    el.classList.add(rotate < 0 ? '-' : '' + 'rotate-' + Math.abs(rotate))
+    const rotate = parseInt(Math.random() * 3) * 30 - 60
+
+    el.classList.add('transform')
+    el.classList.add((rotate < 0 ? '-' : '') + 'rotate-' + Math.abs(rotate))
 
     el.style.opacity = 0
     el.style.position = 'absolute'
     el.style.fontSize = fontSize + 'em'
-    el.style.left = 40 + Math.random() * (vx - 80) + 'px'
-    el.style.top = 40 + Math.random() * (vy - 80) + 'px'
+    el.style.left = 80 + Math.random() * (vx - 160) + 'px'
+    el.style.top = 80 + Math.random() * (vy - 160) + 'px'
 
     el = document.body.appendChild(el)
 
     el.classList.add('transition')
-    el.classList.add('duration-1000')
+    el.classList.add('duration-3000')
     el.classList.add('ease-in-out')
 
     let listener
@@ -193,8 +195,6 @@ export const mutations = {
     }
   },
   migrate(state) {
-    console.log('migrating!')
-
     if (!state.legacy) {
       state.legacy = {
         clicks: 0,

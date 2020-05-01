@@ -107,7 +107,7 @@ export default {
     shareOfCps: function () {
       let effectiveCps = this.$store.getters.effectiveCps
 
-      return parseInt(
+      return Math.round(
         effectiveCps === 0
           ? 0
           : ((this.effectiveCps * this.count) / effectiveCps) * 100
