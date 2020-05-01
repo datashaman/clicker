@@ -67,23 +67,33 @@ export const getters = {
 
 export const actions = {
   random({ dispatch }, args) {
-    let bolts
+    args = args || {}
+
     const randomNumber = Math.random() * 100
 
     switch (true) {
       case randomNumber < 5:
-        bolts = Math.random() * 16
-        for (let i = 0; i < bolts; i++) {
-          setTimeout(() => {
-            dispatch('bolt', args)
-          }, 1000 * i + Math.random() * 300 - 150)
-        }
+        dispatch('storm', args)
         break
       default:
         dispatch('bolt', args)
     }
   },
-  bolt({ commit, state }) {
+  storm({ dispatch }, args) {
+    args = args || {}
+    args.storm = true
+
+    const bolts = Math.random() * 16
+
+    for (let i = 0; i < bolts; i++) {
+      setTimeout(() => {
+        dispatch('bolt', args)
+      }, 1000 * i + Math.random() * 300 - 150)
+    }
+  },
+  bolt({ commit, state }, args) {
+    args = args || {}
+
     let el = document.getElementById('clicker')
 
     if (!el) {
@@ -124,6 +134,10 @@ export const actions = {
       el.style.opacity = 0
 
       let amount = parseInt(((2.5 + Math.random() * 5) / 100) * state.clicks)
+
+      if (args.storm) {
+        amount = parseInt(amount / 2)
+      }
 
       commit('click', { amount })
 
