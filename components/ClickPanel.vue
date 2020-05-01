@@ -71,7 +71,7 @@
       <div class="font-bold text-base">Version</div>
 
       <div v-if="sourceVersion">
-        {{ sourceVersion }}
+        <a :href="sourceVersionLink">{{ sourceVersion }}</a>
       </div>
     </div>
 
@@ -106,6 +106,11 @@ export default {
     ]),
     cps: function () {
       return this.manualCps + this.$store.getters.effectiveCps
+    },
+    sourceVersionLink() {
+      return (
+        'https://github.com/datashaman/clicker/commits/' + this.sourceVersion
+      )
     },
   },
   methods: {
