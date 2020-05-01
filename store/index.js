@@ -83,7 +83,7 @@ export const actions = {
     args = args || {}
     args.storm = true
 
-    const bolts = Math.random() * 16
+    const bolts = 16 + Math.random() * 16
 
     for (let i = 0; i < bolts; i++) {
       setTimeout(() => {
@@ -142,7 +142,7 @@ export const actions = {
       let amount = parseInt(((2.5 + Math.random() * 5) / 100) * state.clicks)
 
       if (args.storm) {
-        amount = parseInt(amount / 2)
+        amount = parseInt(amount / 4)
       }
 
       commit('click', { amount })
