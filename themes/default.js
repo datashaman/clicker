@@ -393,7 +393,7 @@ export const upgrades = {
   },
   process_6: {
     description: 'The processes are twice as efficient.',
-    name: '',
+    name: 'LLVM',
     cost: 550 * units.giga,
     icon: 'project-diagram',
     reward: (state) => {
