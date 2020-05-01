@@ -71,7 +71,9 @@
       <div class="font-bold text-base">Version</div>
 
       <div v-if="sourceVersion">
-        <a :href="sourceVersionLink">{{ sourceVersion }}</a>
+        <a target="_blank" rel="noopener noreferer" :href="sourceVersionLink">
+          {{ sourceVersion }}
+        </a>
       </div>
     </div>
 
