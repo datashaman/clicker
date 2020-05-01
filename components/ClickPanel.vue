@@ -23,7 +23,7 @@
     </div>
 
     <div class="m-4 leading-relaxed text-right text-xs">
-      <div class="font-bold">All Time</div>
+      <div class="font-bold text-base">All Time</div>
 
       <div v-if="legacy.started">
         started
@@ -49,7 +49,7 @@
 
       <div>{{ legacy.resetCounter || resetCounter || 0 }} resets</div>
 
-      <div class="font-bold">Run</div>
+      <div class="font-bold text-base">Run</div>
 
       <div v-if="started">
         <div>
