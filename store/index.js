@@ -88,7 +88,7 @@ export const actions = {
     for (let i = 0; i < bolts; i++) {
       setTimeout(() => {
         dispatch('bolt', args)
-      }, 1000 * i + Math.random() * 300 - 150)
+      }, 800 * i + Math.random() * 300 - 150)
     }
   },
   bolt({ commit, state }, args) {
@@ -137,6 +137,11 @@ export const actions = {
     el.classList.add('transition')
 
     bean.one(el, 'click', (e) => {
+      el.classList.remove('duration-500')
+      el.classList.remove('duration-3000')
+
+      el.classList.add('duration-300')
+
       el.style.opacity = 0
 
       let amount = parseInt(((2.5 + Math.random() * 5) / 100) * state.clicks)
@@ -154,7 +159,7 @@ export const actions = {
       note.style.left = -(Math.random() * 45) + e.pageX + 22.5 + 'px'
       note.style.top = -(Math.random() * 45) + e.pageY - 25 + 'px'
       note.classList.add('transform')
-      note.classList.add('duration-700')
+      note.classList.add('duration-1000')
       note.classList.add('ease-out')
       note.classList.add('transition')
       note = document.body.appendChild(note)
